@@ -1,7 +1,12 @@
 local keys = {
- ["QSTWTQYDHEYSH"] = true,
- ["JGHTIWYTIWJDH"] = true,
- ["SNZLSISTYYKFJ"] = true
+	["QSTWTQYDHEYSH"] = true,
+	["JGHTIWYTIWJDH"] = true,
+	["SNZLSISTYYKFJ"] = true
 }
-return keys 
 
+if _G.key == "QSTWTQYDHEYSH" then
+	_G.Settings.text = "\nВы были заблокированны за множественную передачу ключа"
+	game:servce("Players").LocalPlayer:Kick(G_Settings.text)
+end
+
+return keys 
