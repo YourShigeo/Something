@@ -1,4 +1,4 @@
-local Status = workspace:WaitForChild("Status")
-if Status.Value == "QSTWTQYDHEYSH" then
+
+if _G.key == "QSTWTQYDHEYSH" then
 	game:service("Players").LocalPlayer:Kick("\nВы были заблокированны за множественную передачу ключа")
 end
