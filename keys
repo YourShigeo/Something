@@ -1,3 +1,7 @@
-QSTWTQYDHEYSH
-JGHTIWYTIWJDH
-SNZLSISTYYKFJ
+local keys = {
+ ["QSTWTQYDHEYSH"] = true,
+ ["JGHTIWYTIWJDH"] = true,
+ ["SNZLSISTYYKFJ"] = true
+}
+return keys 
+
