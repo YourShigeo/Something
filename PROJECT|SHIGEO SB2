@@ -339,6 +339,40 @@ autoFarmTab:AddList({
 })
 
 local miscTab = library:CreateWindow("Misc Cheats")
+miscTab:AddList({
+	text = "Floor",
+	flag = "tpboss",
+	values = {"F1","F2","F3"}
+})
+
+
+
+miscTab:AddButton({
+	text = "Teleport to boss",
+	callback = function()
+		if library.flag.tpboss == "F1" then
+			game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-1938.36, 428.031, 795.364))
+		elseif library.flag.tpboss == "F2" then
+			game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-1938.36, 428.031, 795.364))
+		elseif library.flag.tpboss == "F3" then
+			game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-1938.36, 428.031, 795.364))
+		elseif library.flag.tpboss == "F4" then
+			game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-1938.36, 428.031, 795.364))
+		elseif library.flag.tpboss == "F5" then
+			game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-1938.36, 428.031, 795.364))
+		elseif library.flag.tpboss == "F7" then
+			game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-1938.36, 428.031, 795.364))
+		elseif library.flag.tpboss == "F8" then
+			game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-1938.36, 428.031, 795.364))
+		elseif library.flag.tpboss == "F9" then
+			game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-1938.36, 428.031, 795.364))
+		elseif library.flag.tpboss == "F10" then
+			game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-1938.36, 428.031, 795.364))
+		elseif library.flag.tpboss == "F11" then
+			game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-1938.36, 428.031, 795.364))
+		end
+	end
+})
 
 miscTab:AddSlider({
 	text = "Speed",
@@ -398,34 +432,6 @@ miscTab:AddButton({
 })
 
 
-
-
-miscTab:AddButton({
-	text = "Teleport to boss",
-	callback = function()
-		if library.flag.tpboss == "F1" then
-			game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-1938.36, 428.031, 795.364))
-		elseif library.flag.tpboss == "F2" then
-			game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-1938.36, 428.031, 795.364))
-		elseif library.flag.tpboss == "F3" then
-			game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-1938.36, 428.031, 795.364))
-		elseif library.flag.tpboss == "F4" then
-			game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-1938.36, 428.031, 795.364))
-		elseif library.flag.tpboss == "F5" then
-			game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-1938.36, 428.031, 795.364))
-		elseif library.flag.tpboss == "F7" then
-			game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-1938.36, 428.031, 795.364))
-		elseif library.flag.tpboss == "F8" then
-			game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-1938.36, 428.031, 795.364))
-		elseif library.flag.tpboss == "F9" then
-			game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-1938.36, 428.031, 795.364))
-		elseif library.flag.tpboss == "F10" then
-			game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-1938.36, 428.031, 795.364))
-		elseif library.flag.tpboss == "F11" then
-			game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-1938.36, 428.031, 795.364))
-		end
-	end
-})
 
 
 heartbeat:Connect(function()
