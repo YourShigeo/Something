@@ -397,11 +397,8 @@ miscTab:AddButton({
 	end
 })
 
-MiscTab:AddList({
-	text = "Teleport to boss",
-	flag = "tpboss",
-	values = {"F1","F2","F3","F4","F5","F7","F8","F9","F10","F11"}
-})
+
+
 
 miscTab:AddButton({
 	text = "Teleport to boss",
