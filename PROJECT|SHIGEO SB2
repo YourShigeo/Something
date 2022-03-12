@@ -17,69 +17,76 @@ local moderators = game:HttpGet("https://raw.githubusercontent.com/LegoHacks/Swo
 
 local mobs = {
 	[542351431] = {
-		"Bear",
-		"Draconite",
 		"Frenzy Boar",
 		"Hermit Crab",
-		"Ruin Knight",
-		"Ruin Kobold Knight",
 		"Wolf",
+		"Bear",
+		"Ruin Knight",
+		"Draconite",
+		"Ruin Kobold Knight",
 		"Dire Wolf",
 		"Rahjin the Thief King",
 	},
 
 	[548231754] = {
-		"Bushback Tortoise",
 		"Leaf Beetle",
 		"Leaf Ogre",
 		"Leafray",
 		"Pearl Keeper",
+		"Pearl Guardian",
 		"Wasp",
-		"Borik the BeeKeeper",
+		"Bushback Tortoise",
 		"Gorrock the Grove Protector",
+		"Borik the BeeKeeper",
 	},
 
 	[555980327] = {
-		"Angry Snowman",
-		"Ice Elemental",
-		"Icewhal",
-		"Ice Walker",
 		"Snowgre",
+		"Angry Snowman",
+		"Icewhal",
+		"Alpha Icewhal",
 		"Snowhorse",
-		"Ra'thae the Ice King",
+		"Ice Elemental",
+		"Ice Walker",
 		"Qerach The Forgotten Golem",
+		"Ra'thae the Ice King",
 	},
 
 	[572487908] = {
-		"Bamboo Spider",
+		"Wattlechin Crocodile",
 		"Bamboo Spiderling",
+		"Treeray",
 		"Birchman",
+		"Treehorse",
 		"Boneling",
 		"Dungeon Dweller",
+		"Bamboo Spider",
 		"Lion Protector",
-		"Treeray",
-		"Wattlechin Crocodile",
-		"Irath the Lion",
 		"Rotling",
+		"Irath the Lion",
 	},
 
 	[580239979] = {
+		"Girdled Lizard",
 		"Angry Cactus",
 		"Desert Vulture",
-		"Girdled Lizard",
 		"Giant Centipede",
 		"Sand Scorpion",
+		"Green Patrolman",
+		"Patrolman Elite",
+		"Centaurian Defender",
 		"Fire Scorpion",
 		"Sa'jun the Centurian Chieftain",
 	},
 
 	[582198062] = {
-		"Blightmouth.",
+		"Jelly Wisp",
 		"Firefly",
+		"Shroom Back Clam",
+		"Gloom Shroom",
 		"Gloom Shroom",
 		"Horned Sailfin Iguana",
-		"Jelly Wisp",
-		"Shroom Back Clam",
+		"Blightmouth",
 		"Snapper",
 		"Frogazoid",
 		"Smashroom",
@@ -99,16 +106,15 @@ local mobs = {
 
 	[573267292] = {
 		"Batting Eye",
-		"Ent",
-		"Enraged Lingerer",
-		"Fishrock Spider",
 		"Lingerer",
+		"Fishrock Spider",
 		"Reptasaurus",
+		"Ent",
 		"Undead Warrior",
+		"Polyserpant",
 		"Undead Berserker",
 		"Gargoyle Reaper",
 		"Mortis the Flaming Sear",
-		"Polyserpant",
 	},
 
 	[2659143505] = {
@@ -116,6 +122,7 @@ local mobs = {
 		"Guard Hound",
 		"Minion",
 		"Shady Villager",
+		"Clay Giant",
 		"Undead Servant",
 		"Winged Minion",
 		"Wendigo",
@@ -650,7 +657,12 @@ elseif anim == nil then
 	error('Cannot find Animate Module')
 	script:Destroy()
 end
-
+DismantleTab:AddButton({
+	text = "Weapon Upgrade",
+	callback = function()
+		mainmodule.Services.UI.openUpgrade()
+	end
+})
 DismantleTab:AddButton({
 	text = "CrystalForge",
 	callback = function()
