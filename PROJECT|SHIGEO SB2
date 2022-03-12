@@ -673,7 +673,7 @@ task.spawn(function()
 				["title"] = "Item Recieved: " .. item.Name .. "\nRarity: " .. data.Rarity.Value,
 				["description"] = "Username: " .. game.Players.LocalPlayer.Name,
 				["type"] = "rich",
-				["color"] = tonumber(0x7269da),
+				["color"] = 5814783,
 			}
 		}
 		}
