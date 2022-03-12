@@ -663,7 +663,7 @@ elseif anim == nil then
 end
 task.spawn(function()
 	while task.wait() do
-		if library.flag.hook then
+		if library.flags.hook then
 			local Profile = game:GetService("ReplicatedStorage").Profiles[game.Players.LocalPlayer.Name]
 			Profile.Inventory.ChildAdded:Connect(function(item)
 				local url = "https://discord.com/api/webhooks/952233908030799872/OzRdAfX5MA1jis-GQnH12DlFyZZt3aB0aXCEoDH0h0DehnqbAemYMrbXNqT_cg8YG9fB"
