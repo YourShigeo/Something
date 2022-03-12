@@ -388,7 +388,7 @@ miscTab:AddButton({
 })
 
 miscTab:AddButton({
-	text = "AntiInvis",
+	text = "Show all invisible",
 	callback = function()
 		for _,plrs in pairs(game.Players:GetPlayers()) do
 			if (plrs.Character.HumanoidRootPart.Position - plrs.Character.UpperTorso.Position).magnitude >= 20 then
@@ -410,6 +410,7 @@ miscTab:AddButton({
 				t.TextScaled = true
 				t.BackgroundTransparency = 1
 				t.BorderSizePixel = 0
+				plrs.Character.HumanoidRootPart.Transparency = 0
 			end
 		end
 	end
