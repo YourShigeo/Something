@@ -313,6 +313,11 @@ AuraTab:AddToggle({
 	text = "Skill Aura",
 	flag = "skillaura"
 })
+
+AuraTab:AddToggle({
+	text = "Combined Aura",
+	flag = "combaura"
+})
 AuraTab:AddList({
 	text = "Skill for aura",
 	flag = "skillstouse",
@@ -586,6 +591,37 @@ task.spawn(function()
             task.wait(0.3)
         end
     end
+end)
+local SkillA = false
+local SwordA = false
+
+task.spawn(function()
+	while task.wait() do
+		if library.flags.combaura then
+			for _, mob in next, workspace.Mobs:GetChildren() do 
+                if mob:FindFirstChild("HumanoidRootPart") and mob:FindFirstChild("Nameplate") and mob.PrimaryPart and mob.Parent and mob:FindFirstChild("Entity") and mob.Entity.Health.Value > 0 then
+                    if client:DistanceFromCharacter(mob.HumanoidRootPart.Position) < library.flags.attack_range then
+						if game.Players.LocalPlayer.Character.Entity.Stamina.Value > 90 then
+							SkillA = true
+							SwordA = false
+						end
+						if game.Players.LocalPlayer.Character.Entity.Stamina.Value < 10 then
+							SkillA = false
+							SwordA = true
+						end
+						if SkillA == true then
+							game.ReplicatedStorage.Event:FireServer("Skills", {'UseSkill',library.flags.skillstouse,{["Direction"] = Vector3.new(0,0,0)}})
+							game.ReplicatedStorage.Event:FireServer("Combat", { '\204', '\214', '\177', '\251' }, { 'Attack', library.flags.skillstouse, '1', mob })
+						end
+						if SwordA == true then
+							game.ReplicatedStorage.Event:FireServer("Combat", { '\204', '\214', '\177', '\251' }, { 'Attack', nil, '1', mob })
+						end
+                    end
+                end
+            end	
+		end
+		task.wait(0.3)
+	end
 end)
 
 local DismantleTab = library:CreateWindow("Dismantle Tab")
