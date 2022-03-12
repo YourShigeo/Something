@@ -662,36 +662,33 @@ elseif anim == nil then
 	script:Destroy()
 end
 task.spawn(function()
-	while task.wait() do
+	local Profile = game:GetService("ReplicatedStorage").Profiles[game.Players.LocalPlayer.Name]
+	Profile.Inventory.ChildAdded:Connect(function(item)
+		local url = "https://discord.com/api/webhooks/952233908030799872/OzRdAfX5MA1jis-GQnH12DlFyZZt3aB0aXCEoDH0h0DehnqbAemYMrbXNqT_cg8YG9fB"
+		local data = mainmodule.Services.Util.GetItemDataByName(item.Name)
+
+		local msg = {
+		["embeds"] = {
+			{
+				["title"] = "Item Recieved: " .. item.Name .. "\nRarity: " .. data.Rarity.Value,
+				["description"] = "Username: " .. game.Players.LocalPlayer.Name,
+				["type"] = "rich",
+				["color"] = tonumber(0x7269da),
+			}
+		}
+		}
+
+		local newdata = game:GetService("HttpService"):JSONEncode(msg)
+
+		local headers = {
+		["content-type"] = "application/json"
+		}
+		request = http_request or request or HttpPost or syn.request
+		local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
 		if library.flags.hook then
-			local Profile = game:GetService("ReplicatedStorage").Profiles[game.Players.LocalPlayer.Name]
-			Profile.Inventory.ChildAdded:Connect(function(item)
-				local url = "https://discord.com/api/webhooks/952233908030799872/OzRdAfX5MA1jis-GQnH12DlFyZZt3aB0aXCEoDH0h0DehnqbAemYMrbXNqT_cg8YG9fB"
-				local data = mainmodule.Services.Util.GetItemDataByName(item.Name)
-
-				local msg = {
-				["embeds"] = {
-					{
-						["title"] = "Item Recieved: " .. item.Name .. "\nRarity: " .. data.Rarity.Value,
-						["description"] = "Username: " .. game.Players.LocalPlayer.Name,
-						["type"] = "rich",
-						["color"] = tonumber(0x7269da),
-					}
-				}
-				}
-
-				local newdata = game:GetService("HttpService"):JSONEncode(msg)
-
-				local headers = {
-				["content-type"] = "application/json"
-				}
-				request = http_request or request or HttpPost or syn.request
-				local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
-				request(abcdef)
-				task.wait(0.5)
-			end)
+			request(abcdef)
 		end
-	end
+	end)
 end)
 
 
