@@ -127,7 +127,7 @@ local mobs = {
 		"Winged Minion",
 		"Wendigo",
 		"Baal  The  Tormentor",
-		"Grim the Overseer"
+		"Grim  the  Overseer"
 	},
 
 	[5287433115] = {
