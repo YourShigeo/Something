@@ -358,6 +358,11 @@ miscTab:AddToggle({
 	flag = "fly"
 })
 
+miscTab:AddToggle({
+	text = "Noclip",
+	flag = "clip"
+})
+
 miscTab:AddButton({
 	text = "Go Invisible",
 	callback = function()
@@ -510,6 +515,14 @@ task.spawn(function()
 			Fly()
 		end
 		wait()
+	end
+end)
+
+task.spawn(function()
+	while task.wait() do
+		if library.flags.clip then
+			game.Players.LocalPlayer.Character:findFirstChildOfClass("Humanoid"):ChangeState(11)
+		end
 	end
 end)
 task.spawn(function()
