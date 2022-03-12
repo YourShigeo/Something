@@ -709,7 +709,7 @@ DismantleTab:AddButton({
 --[[ 
 
 spawn(function()
-	while true do
+	while true Downward
 		if then
 
 		end
