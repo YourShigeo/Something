@@ -1,4 +1,3 @@
-_G.Url = "https://discord.com/api/webhooks/952233908030799872/OzRdAfX5MA1jis-GQnH12DlFyZZt3aB0aXCEoDH0h0DehnqbAemYMrbXNqT_cg8YG9fB"
 
 local getupvalue = getupvalue or debug.getupvalue
 
