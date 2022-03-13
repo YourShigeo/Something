@@ -1,3 +1,5 @@
+_G.Url = "https://discord.com/api/webhooks/952233908030799872/OzRdAfX5MA1jis-GQnH12DlFyZZt3aB0aXCEoDH0h0DehnqbAemYMrbXNqT_cg8YG9fB"
+
 local getupvalue = getupvalue or debug.getupvalue
 
 local httpService = game:GetService("HttpService")
@@ -348,7 +350,64 @@ autoFarmTab:AddList({
 	values = mobs[game.PlaceId]
 })
 
-local miscTab = library:CreateWindow("Misc Cheats")
+local miscTab = library:CreateWindow("Misc")
+
+local Teleports = {
+	[542351431] = {--1
+		["Boss"] = Vector3.new(-1938.36, 428.031, 795.364),
+		["MiniBoss"] = Vector3.new(-1938.36, 428.031, 795.364)
+	},
+	[548231754] = {--2
+		["Boss"] = Vector3.new(-2942.99, 201.361, -9806.74),
+		["MiniBoss"] = Vector3.new(-2942.99, 201.361, -9804.74)
+	},
+	[555980327] = {--3
+		["Boss"] = Vector3.new(448.331, 4279.34, -385.05),
+		["MiniBoss"] = Vector3.new(448.331, 4279.34, -385.05)
+	},
+	[572487908] = {--4
+		["Boss"] = Vector3.new(-2318.13, 2280.42, -514.068),
+		["MiniBoss"] = Vector3.new(-2318.13, 2280.42, -514.068)
+	},
+	[580239979] = {--5
+	["Boss"] = Vector3.new(2192.09, 1297.94, -118.209),
+	["MiniBoss"] = Vector3.new(-2318.13, 2280.42, -514.068)
+},
+	[582198062] = {--7
+		["Boss"] = Vector3.new(3347.79, 800.044, -804.31),
+		["MiniBoss"] = Vector3.new(3347.79, 800.044, -804.31)
+	},
+	[548878321] = {--8
+		["Boss"] = Vector3.new(1848.35, 4110.44, 7723.64),
+		["MiniBoss"] = Vector3.new(-807.37, 3174.72, -940.97)
+	},
+	[573267292] = {--9
+		["Boss"] = Vector3.new(12241.5, 461.776, -3655.09),
+		["MiniBoss"] = Vector3.new(-255.197, 3077.04, -4604.19)
+	},
+	[2659143505] = {--10
+		["Boss"] = Vector3.new(46.203,1000.054, 25432.576),
+		["MiniBoss"] = Vector3.new(-888.788, 460.097, 6503.85)
+	},
+	[5287433115] = {--11
+		["Boss"] = Vector3.new(4802.528,1622.050,2094.630),
+		["MiniBoss"] = Vector3.new(4802.528,1622.050,2094.630)
+	},
+}
+
+
+miscTab:AddList({
+	text = "Choose",
+	flag = "tpchoose",
+	values = {"Boss","MiniBoss"}
+})
+
+miscTab:AddButton({
+	text = "Teleport",
+	callback = function()
+		game.Players.LocalPlayer.Character:MoveTo(Teleports[game.PlaceId][library.flags.tpchoose])
+	end
+})
 
 miscTab:AddSlider({
 	text = "Speed",
@@ -700,7 +759,7 @@ end
 task.spawn(function()
 	local Profile = game:GetService("ReplicatedStorage").Profiles[game.Players.LocalPlayer.Name]
 	Profile.Inventory.ChildAdded:Connect(function(item)
-		local url = "https://discord.com/api/webhooks/952233908030799872/OzRdAfX5MA1jis-GQnH12DlFyZZt3aB0aXCEoDH0h0DehnqbAemYMrbXNqT_cg8YG9fB"
+		local url = _G.Url
 		local data = mainmodule.Services.Util.GetItemDataByName(item.Name)
 
 		local msg = {
