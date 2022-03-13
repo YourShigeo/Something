@@ -232,22 +232,7 @@ local function getClosestMob()
 	return mob
 end
 
-local function isAlive(v)
-	local alive
-	if v.Parent == nil or v == nil or (v:FindFirstChild("Entity") and v:FindFirstChild("Entity"):FindFirstChild("Health") and v:FindFirstChild("Entity"):FindFirstChild("Health").Value == 0) then 
-		if v.Name ~= "Reaper" and v:FindFirstChild("Head") and v.Head.Transparency ~= 0 then
-			alive = false 
-		elseif v.Name == "Reaper" and v:FindFirstChild("Reaper hands") and v["Reaper hands"].Transparency ~= 0 then
-			alive = false
-		else
-			alive = true
-		end
-	else 
-		alive = true 
-	end
-			
-	return alive
-end
+
 
 for i, v in next, players:GetPlayers() do
 	if (table.find(moderators, tostring(v.UserId))) then
@@ -331,16 +316,23 @@ autoFarmTab:AddToggle({
 	flag = "autofarming"
 })
 
+autoFarmTab:AddToggle({
+	text = "Prioritise Bosses",
+	flag = "bosses"
+})
+
+autoFarmTab:AddSlider({
+	text = "Adjust Radius",
+	flag = "dist",
+	min = 400,
+	max = 10000
+})
+
 autoFarmTab:AddSlider({
 	text = "Adjust Y",
 	flag = "Y_point",
 	min = 15,
 	max = 40
-})
-
-autoFarmTab:AddToggle({
-	text = "Prioritise Bosses",
-	flag = "bosses"
 })
 
 autoFarmTab:AddSlider({
@@ -547,10 +539,18 @@ task.spawn(function()
 			local mob = getClosestMob()
 
 			if (mob) then
-				pcall(function()
-					client.Character.Humanoid:ChangeState(11)
-					tweenService:Create(client.Character.HumanoidRootPart, TweenInfo.new(((client.Character.HumanoidRootPart.Position - mob.HumanoidRootPart.Position)).Magnitude / library.flags.tween_speed), {CFrame = mob.PrimaryPart.CFrame * CFrame.new(0, library.flags.Y_point, 0)}):Play()
-				end)
+				if (library.flags.autofarming) then
+					local mob = getClosestMob()
+					
+					if (mob) then
+						if client:DistanceFromCharacter(mob.HumanoidRootPart.Position) < library.flags.dist then
+							pcall(function()
+								client.Character.Humanoid:ChangeState(11)
+								tweenService:Create(client.Character.HumanoidRootPart, TweenInfo.new(((client.Character.HumanoidRootPart.Position - mob.HumanoidRootPart.Position)).Magnitude / library.flags.tween_speed), {CFrame = mob.PrimaryPart.CFrame * CFrame.new(0, library.flags.Y_point, 0)}):Play()
+							end)
+						end
+					end
+				end
 			end
 		end
 		wait()
@@ -742,4 +742,3 @@ DismantleTab:AddButton({
 })
 
 library:Init()
-
