@@ -325,7 +325,7 @@ autoFarmTab:AddToggle({
 autoFarmTab:AddSlider({
 	text = "Adjust Radius",
 	flag = "dist",
-	min = 400,
+	min = 100,
 	max = 5000
 })
 
