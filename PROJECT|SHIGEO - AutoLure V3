@@ -49,9 +49,8 @@ end
 local function TPPrivate(SERVERCODE)
     game:GetService("ReplicatedStorage").Events.reserved:InvokeServer(unpack({[1] = SERVERCODE}))
     wait(0.1)
-    game:GetService("Players").LocalPlayer.PlayerGui.chooseType.Frame.RemoteEvent:FireServer(unpack({[1] = "regular"}))
+    game:GetService("Players").LocalPlayer:WaitForChild('PlayerGui'):WaitForChild('chooseType'):WaitForChild('Frame'):WaitForChild('RemoteEvent'):FireServer(unpack({[1] = "regular"}))
 end
----
 
 local function Notification(Title,Text,Time)
     starterGui:SetCore("SendNotification", {Title = Title; Text = Text; Duration = Time;})
