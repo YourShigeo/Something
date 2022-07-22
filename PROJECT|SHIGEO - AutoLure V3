@@ -1,0 +1,228 @@
+------------------------------------------------------------------------------------------------------------------------------------|
+------------------------------------------------------------------------------------------------------| SCRIPT MADED BY YOURSHIGEO <3
+local Version = "3.0"
+
+repeat wait() until game:IsLoaded()
+
+local Players = game:GetService('Players')
+local Client = Players.LocalPlayer or Players:GetPropertyChangedSignal('LocalPlayer'):Wait() or Players.LocalPlayer
+local Character = Client.Character or Client.CharacterAdded:Wait()
+local Humanoid = Character:WaitForChild('Humanoid')
+local HRP = Character:WaitForChild('HumanoidRootPart')
+local tweenService = game:GetService("TweenService")
+local starterGui = game:GetService("StarterGui")
+
+local JoinTime = os.time()
+local Status = "Nil"
+local Teleporting = false
+local WColor = nil
+
+local Menu = game.PlaceId == 1730877806
+local Game = game.PlaceId == 7465136166
+------------------------------------------------------------------------------------------------------------------------------------|
+--------------------------------------------------------------------------------------------------------------------------| POSITIONS
+local StartPos = Vector3.new(-3694.16, 18.1678, 432.999)
+local FPos = Vector3.new(-4077.764, -1.29, 432.999)
+local SPos = Vector3.new(-4077.764, -1.29, 1909.566)
+local RPos = Vector3.new(-3535.018, -2, 1321.42)
+local LPos = Vector3.new(-3535.018, 197.742, 1321.42)
+local EPos = Vector3.new(-3535.018, 226.546, 971.561)
+
+local Part = Instance.new("Part")
+Part.Parent = workspace
+Part.Size = Vector3.new(2, 2, 1)
+Part.Position = FPos
+Part.Orientation = Vector3.new(0,180,0)
+Part.Transparency = 1
+Part.CanCollide = false
+Part.Anchored = true
+------------------------------------------------------------------------------------------------------------------------------------|
+--------------------------------------------------------------------------------------------------------------------------| FUNCTIONS
+
+local function TPMenu()
+    if _G.Active == true then
+        game:GetService("TeleportService"):Teleport(1730877806, LocalPlayer)
+    end
+end
+---
+
+local function TPPrivate(SERVERCODE)
+    game:GetService("ReplicatedStorage").Events.reserved:InvokeServer(unpack({[1] = SERVERCODE}))
+    wait(0.1)
+    game:GetService("Players").LocalPlayer.PlayerGui.chooseType.Frame.RemoteEvent:FireServer(unpack({[1] = "regular"}))
+end
+---
+
+local function Notification(Title,Text,Time)
+    starterGui:SetCore("SendNotification", {Title = Title; Text = Text; Duration = Time;})
+end
+---
+
+local function webhook(url,title,desc,color)
+    local url = url
+    local msg = {
+    ["embeds"] = {
+        {
+            ["title"] = title,
+            ["description"] = desc,
+            ["type"] = "rich",
+            ["color"] = color,
+        }
+    }
+    }
+    local newdata = game:GetService("HttpService"):JSONEncode(msg)
+    local headers = {
+    ["content-type"] = "application/json"
+    }
+    request = http_request or request or HttpPost or syn.request
+    local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
+    request(abcdef)
+end
+---
+
+--COLORDATA
+local Standart = 5814783
+local Red = 15158332
+local Green = 3066993
+local Blue = 3447003
+local Gold = 15844367
+local Purple = 10181046
+local Azure = 1752220
+--
+
+local function WColor(Color)
+    if Color == "Red" then
+        WColor = Red
+    end
+    if Color == "Green" then
+        WColor = Green
+    end
+    if Color == "Blue" then
+        WColor = Blue
+    end
+    if Color == "Gold" then
+        WColor = Gold
+    end
+    if Color == "Purple" then
+        WColor = Purple
+    end
+    if Color == "Azure" then
+        WColor = Azure
+    end
+end
+---
+
+local function TweenMovement(A,B,Speed)
+	task.spawn(function()
+        Teleporting = true
+        tweenService:Create(A, TweenInfo.new(((A.Position - B.Position)).Magnitude / Speed, Enum.EasingStyle.Linear, Enum.EasingDirection.Out),{CFrame = B.CFrame * CFrame.new(0, 0, 0)}):Play()
+		repeat
+			task.wait()
+			game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+			local magnitude = (A.Position - B.Position).Magnitude
+			if magnitude < 1 then
+				Teleporting = false
+			end
+		until magnitude < 1
+	end)
+end
+---
+local PCount = 0
+local function PCount()
+    PCount = 0
+    local children = workspace.NPCs:GetChildren()
+    for i = 1, #children do
+        if children[i].Name == "Kraken" then
+            PCount = PCount + 1
+        end
+    end
+    return PCount
+end
+---
+
+local function WaitForMob()
+    Notification("PROJECT|SHIGEO", "Mob Module has been sucessfully loaded", 3)
+    workspace.NPCs.ChildAdded:Connect(function(Mob)
+        local MobHrp = Mob:WaitForChild('HumanoidRootPart')
+        if Mob.Name == "Sea Serpent" and (game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 1500 then
+            webhook(_G.Url, "Sea Serpent has been despawned", "Time Elapsed: " .. os.time() - JoinTime .. " seconds " .. "username: " .. Client.Name, Standart)
+            game:GetService("ReplicatedStorage").Events.KnockedOut:FireServer(unpack({[1] = "self"}))
+            wait(5)
+            TPMenu()
+        elseif Mob.Name == "Kraken" and (game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 500 then
+            WColor(Mob.BodyColor.Value)
+            webhook(_G.Url, "Kraken has been spawned", "Time Elapsed: " .. os.time() - JoinTime .. " seconds " .. "username: " .. Client.Name, Standart)
+            Part.Position = RPos
+            TweenMovement(HRP,Part,110)
+            repeat task.wait() until Teleporting == false
+            Part.Position = LPos
+            TweenMovement(HRP,Part,110)
+            repeat task.wait() until Teleporting == false
+            Part.Position = EPos
+            TweenMovement(HRP,Part,110)
+            repeat task.wait() until Teleporting == false
+            repeat task.wait() until (game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 250
+            webhook(_G.Url2, "Kraken has been Lured ","Color: " .. Mob.BodyColor.Value .. "\nTotaly spawned: " .. PCount .. "\nServer code: " .. game.ReplicatedStorage.reservedCode.Value, WColor)
+            TPMenu()
+        end
+    end)
+end
+---
+
+------------------------------------------------------------------------------------------------------------------------------------|
+-------------------------------------------------------------------------------------------------------------------------| SERVERHOP
+
+if Menu then
+    TPPrivate(_G.Private)
+end
+
+------------------------------------------------------------------------------------------------------------------------------------|
+--------------------------------------------------------------------------------------------------------------------| DEBUG UTILITIES
+
+if setfflag then
+    setfflag('HumanoidParallelRemoveNoPhysics', 'False')
+    setfflag('HumanoidParallelRemoveNoPhysicsNoSimulate2', 'False')
+end
+
+task.spawn(function()
+    wait(_G.Countdown)
+    TPMenu()
+end)
+
+task.spawn(function()
+    game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Died:Connect(function()
+        TPMenu()
+    end)
+end)
+
+------------------------------------------------------------------------------------------------------------------------------------|
+------------------------------------------------------------------------------------------------------------------------| MAIN SCRIPT
+
+if Game then
+    if PCount() > _G.MaxLimit then
+        webhook(_G.Url2,"WARNING SERVER HAVE MORE THAN ADDED LIMIT OF KRAKENS","Server code: " .. game.ReplicatedStorage.reservedCode.Value,Red)
+        _G.Active = false
+    else
+        repeat task.wait() until (HRP.Position - StartPos).Magnitude < 50
+        PCount = PCount + 1 
+        Notification("PROJECT|SHIGEO", "Script Sucessfuly loaded, current version: " .. Version .. "!", 3)
+        WaitForMob()
+        game.RunService:Set3dRenderingEnabled(_G.Render)
+        Status = "Setting up"
+        Notification("PROJECT|SHIGEO", Status, 3)
+        TweenMovement(HRP,Part,110)
+        repeat task.wait() until Teleporting == false
+        Part.Position = SPos
+        TweenMovement(HRP,Part,110)
+        repeat task.wait() until Teleporting == false
+        Status = "Moving to Rough waters"
+        Notification("PROJECT|SHIGEO", Status, 3)
+        Part.Position = _G.BoatPos
+        TweenMovement(HRP,Part,110)
+        repeat task.wait() until Teleporting == false
+        Status = "Spawning boat"
+        Notification("PROJECT|SHIGEO", Status, 3)
+        game:GetService("ReplicatedStorage").Events.ShipEvents.Spawn:InvokeServer(unpack({[1] = "true"}))
+        Status = "Done"
+    end
+end
