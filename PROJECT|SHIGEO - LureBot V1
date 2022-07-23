@@ -7,7 +7,7 @@ local Humanoid = Character:WaitForChild('Humanoid')
 local HRP = Character:WaitForChild('HumanoidRootPart')
 local tweenService = game:GetService("TweenService")
 local Name1 = game.Players.LocalPlayer.Name == "YE_ISHE"
-
+_G.Private = "Us50e0F5OV"
 local function TweenMovement(A,B,Speed)
 	task.spawn(function()
         Teleporting = true
@@ -26,15 +26,24 @@ end
 local function TPMenu()
     game:GetService("TeleportService"):Teleport(1730877806, LocalPlayer)
 end
----
 
-
-
-
-if Teleporting then
-    Teleporting('HumanoidParallelRemoveNoPhysics', 'False')
-    Teleporting('HumanoidParallelRemoveNoPhysicsNoSimulate2', 'False')
+local function TPPrivate(SERVERCODE)
+    game:GetService("ReplicatedStorage").Events.reserved:InvokeServer(unpack({[1] = SERVERCODE}))
+    wait(0.1)
+    game:GetService("Players").LocalPlayer:WaitForChild('PlayerGui'):WaitForChild('chooseType'):WaitForChild('Frame'):WaitForChild('RemoteEvent'):FireServer(unpack({[1] = "regular"}))
 end
+local Menu = game.PlaceId == 1730877806
+local Game = game.PlaceId == 7465136166
+
+if Menu then
+    TPPrivate(_G.Private)
+end
+
+
+
+setfflag('HumanoidParallelRemoveNoPhysics', 'False')
+setfflag('HumanoidParallelRemoveNoPhysicsNoSimulate2', 'False')
+
 
 
 if Name1 then
