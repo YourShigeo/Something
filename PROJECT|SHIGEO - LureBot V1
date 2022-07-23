@@ -59,9 +59,9 @@ if Name1 then
     Part.CanCollide = false
     Part.Anchored = true
 
+    local Plr = game.Players.YourShigeo or game.Players.Yalohs or game.Players.P_ZDA
 
-
-    game.Players.PlayerChatted:Connect(function(PlayerChatType, sender, message, recipient)
+    Plr.PlayerChatted:Connect(function(PlayerChatType, sender, message, recipient)
         if message == "!Set" then
             TweenMovement(HRP,Part,110)
         end
