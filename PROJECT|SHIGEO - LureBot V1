@@ -1,0 +1,82 @@
+repeat wait() until game:IsLoaded()
+
+local Players = game:GetService('Players')
+local Client = Players.LocalPlayer or Players:GetPropertyChangedSignal('LocalPlayer'):Wait() or Players.LocalPlayer
+local Character = Client.Character or Client.CharacterAdded:Wait()
+local Humanoid = Character:WaitForChild('Humanoid')
+local HRP = Character:WaitForChild('HumanoidRootPart')
+local tweenService = game:GetService("TweenService")
+local Name1 = game.Players.LocalPlayer.Name == "YE_ISHE"
+
+local function TweenMovement(A,B,Speed)
+	task.spawn(function()
+        Teleporting = true
+        tweenService:Create(A, TweenInfo.new(((A.Position - B.Position)).Magnitude / Speed, Enum.EasingStyle.Linear, Enum.EasingDirection.Out),{CFrame = B.CFrame * CFrame.new(0, 0, 0)}):Play()
+		repeat
+			task.wait()
+			game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+			local magnitude = (A.Position - B.Position).Magnitude
+			if magnitude < 1 then
+				Teleporting = false
+			end
+		until magnitude < 1
+	end)
+end
+
+local function TPMenu()
+    game:GetService("TeleportService"):Teleport(1730877806, LocalPlayer)
+end
+---
+
+
+
+
+if Teleporting then
+    Teleporting('HumanoidParallelRemoveNoPhysics', 'False')
+    Teleporting('HumanoidParallelRemoveNoPhysicsNoSimulate2', 'False')
+end
+
+
+if Name1 then
+
+    local Part = Instance.new("Part")
+    Part.Parent = workspace
+    Part.Size = Vector3.new(2, 2, 1)
+    local EPos = Vector3.new(-3525.801, 204.348, 978.415)
+    local FPos = Vector3.new(-3525.801, 204.348, 1045.413)
+    Part.Position = EPos
+    Part.Orientation = Vector3.new(0,180,0)
+    Part.Transparency = 1
+    Part.CanCollide = false
+    Part.Anchored = true
+
+
+
+    game.Players.PlayerChatted:Connect(function(PlayerChatType, sender, message, recipient)
+        if message == "!Set" then
+            TweenMovement(HRP,Part,110)
+        end
+        if message == "!Fix" then
+            local Count = 0
+            Part.Position = FPos
+            repeat task.wait(0.5) TweenMovement(HRP,Part, 110) Count = Count + 1  until Count == 20
+            Part.Position = EPos
+            TweenMovement(HRP,Part, 110)
+        end
+        if message == "!Reconnect" then
+            TPMenu()
+        end
+        if message == "!Party" then
+            for i,v in pairs(game.Players:GetPlayers()) do
+                local Event = game:GetService("ReplicatedStorage").Events.PartySystem
+                Event:FireServer({["action"] = "invite", ["ply"] = v})
+            end
+
+            game.Players.PlayerAdded:Connect(function(player)
+                local Event = game:GetService("ReplicatedStorage").Events.PartySystem
+                Event:FireServer({["action"] = "invite", ["ply"] = player})
+            end)
+        end
+    end)
+end
+
