@@ -1,25 +1,4 @@
-repeat wait() until game:IsLoaded()
-
-local Players = game:GetService('Players')
-
-local Name1 = game.Players.LocalPlayer.Name == "Yalohs"
-local Name2 = game.Players.LocalPlayer.Name == "P_ZDA"
-if Name1 or Name2 then
-    _G.Url = "https://discord.com/api/webhooks/995061332787343390/Kjiv52OAVHBmTkjpojPWwCUHz3FXlV_EpiqtsGyerG_cL5iNU2KIGzoKq-32OXBXVWek"
-    _G.Url2 = "https://discord.com/api/webhooks/995610048178958366/I6YEYe_1ZD5OT04TIY-HMd6BFWOk35ZqK5hL1Co-W7Y72oYfhv3EU_k6l7AzQq_1xWd3"
-    _G.Countdown = 120
-    _G.MaxLimit = 80
-    _G.Render = true
-    _G.Active = true
-    if Name1 then
-        _G.Private = "Us50e0F5OV"
-        _G.BoatPos = Vector3.new(-4053.896, -2, 4628.976)
-    elseif Name2 then
-        _G.Private = "Us50e0F5OV"
-        _G.BoatPost = Vector3.new(-2925.742, -2, 4628.976)
-    end
-    
-    ------------------------------------------------------------------------------------------------------------------------------------|
+------------------------------------------------------------------------------------------------------------------------------------|
 ------------------------------------------------------------------------------------------------------| SCRIPT MADED BY YOURSHIGEO <3
 local Version = "3.1"
 
@@ -48,6 +27,7 @@ local SPos = Vector3.new(-4077.764, -1.29, 1909.566)
 local RPos = Vector3.new(-3535.018, -2, 1321.42)
 local LPos = Vector3.new(-3535.018, 197.742, 1321.42)
 local EPos = Vector3.new(-3532.144, 197.788, 983.814)
+local StandPos = Vector3.new(-3525.801, 204.348, 1045.413)
 
 local Part = Instance.new("Part")
 Part.Parent = workspace
@@ -173,15 +153,16 @@ local function WaitForMob()
             WColor(Mob.BodyColor.Value)
             webhook(_G.Url, "Kraken has been spawned", "Time Elapsed: " .. os.time() - JoinTime .. " seconds " .. "username: " .. Client.Name, Standart)
             Part.Position = RPos
-            TweenMovement(HRP,Part,90)
+            TweenMovement(HRP,Part,110)
             repeat task.wait() until Teleporting == false
             Part.Position = LPos
-            TweenMovement(HRP,Part,90)
+            TweenMovement(HRP,Part,110)
             repeat task.wait() until Teleporting == false
             Part.Position = EPos
-            TweenMovement(HRP,Part,90)
+            TweenMovement(HRP,Part,110)
             repeat task.wait() until Teleporting == false
-            repeat task.wait() until (game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 250
+            Part.Position = StandPos
+            repeat task.wait() TweenMovement(HRP,Part,110) until (game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 250
             webhook(_G.Url2, "Kraken has been Lured ","Color: " .. Mob.BodyColor.Value .. "\nTotaly spawned: " .. PCount .. "\nServer code: " .. game.ReplicatedStorage.reservedCode.Value, WColor)
             TPMenu()
         end
@@ -245,7 +226,5 @@ if Game then
         Status = "Done"
     end
 end
-
-end
-
-----------
+------------------------------------------------------------------------------------------------------------------------------------|
+------------------------------------------------------------------------------------------------------------------------------------|
