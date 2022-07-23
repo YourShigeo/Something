@@ -152,13 +152,13 @@ local function WaitForMob()
             WColor(Mob.BodyColor.Value)
             webhook(_G.Url, "Kraken has been spawned", "Time Elapsed: " .. os.time() - JoinTime .. " seconds " .. "username: " .. Client.Name, Standart)
             Part.Position = RPos
-            TweenMovement(HRP,Part,110)
+            TweenMovement(HRP,Part,90)
             repeat task.wait() until Teleporting == false
             Part.Position = LPos
             TweenMovement(HRP,Part,90)
             repeat task.wait() until Teleporting == false
             Part.Position = EPos
-            TweenMovement(HRP,Part,110)
+            TweenMovement(HRP,Part,90)
             repeat task.wait() until Teleporting == false
             repeat task.wait() until (game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 250
             webhook(_G.Url2, "Kraken has been Lured ","Color: " .. Mob.BodyColor.Value .. "\nTotaly spawned: " .. PCount .. "\nServer code: " .. game.ReplicatedStorage.reservedCode.Value, WColor)
