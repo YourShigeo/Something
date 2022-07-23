@@ -177,10 +177,10 @@ end
 
 ------------------------------------------------------------------------------------------------------------------------------------|
 --------------------------------------------------------------------------------------------------------------------| DEBUG UTILITIES
-local setflag = true
-if setflag then
-    setflag('HumanoidParallelRemoveNoPhysics', 'False')
-    setflag('HumanoidParallelRemoveNoPhysicsNoSimulate2', 'False')
+
+if Teleporting then
+    setfflag('HumanoidParallelRemoveNoPhysics', 'False')
+    setfflag('HumanoidParallelRemoveNoPhysicsNoSimulate2', 'False')
 end
 
 task.spawn(function()
