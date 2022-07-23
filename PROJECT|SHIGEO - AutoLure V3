@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------------------------------------------------------------|
 ------------------------------------------------------------------------------------------------------| SCRIPT MADED BY YOURSHIGEO <3
-local Version = "3.0"
+local Version = "3.1"
 
 repeat wait() until game:IsLoaded()
 
@@ -155,7 +155,7 @@ local function WaitForMob()
             TweenMovement(HRP,Part,110)
             repeat task.wait() until Teleporting == false
             Part.Position = LPos
-            TweenMovement(HRP,Part,110)
+            TweenMovement(HRP,Part,90)
             repeat task.wait() until Teleporting == false
             Part.Position = EPos
             TweenMovement(HRP,Part,110)
