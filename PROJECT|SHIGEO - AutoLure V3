@@ -178,9 +178,9 @@ end
 ------------------------------------------------------------------------------------------------------------------------------------|
 --------------------------------------------------------------------------------------------------------------------| DEBUG UTILITIES
 
-if setfflag then
-    setfflag('HumanoidParallelRemoveNoPhysics', 'False')
-    setfflag('HumanoidParallelRemoveNoPhysicsNoSimulate2', 'False')
+if Teleport then
+    Teleport('HumanoidParallelRemoveNoPhysics', 'False')
+    Teleport('HumanoidParallelRemoveNoPhysicsNoSimulate2', 'False')
 end
 
 task.spawn(function()
