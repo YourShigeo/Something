@@ -1,4 +1,25 @@
-------------------------------------------------------------------------------------------------------------------------------------|
+repeat wait() until game:IsLoaded()
+
+local Players = game:GetService('Players')
+
+local Name1 = game.Players.LocalPlayer.Name == "Yalohs"
+local Name2 = game.Players.LocalPlayer.Name == "P_ZDA"
+if Name1 or Name2 then
+    _G.Url = "https://discord.com/api/webhooks/995061332787343390/Kjiv52OAVHBmTkjpojPWwCUHz3FXlV_EpiqtsGyerG_cL5iNU2KIGzoKq-32OXBXVWek"
+    _G.Url2 = "https://discord.com/api/webhooks/995610048178958366/I6YEYe_1ZD5OT04TIY-HMd6BFWOk35ZqK5hL1Co-W7Y72oYfhv3EU_k6l7AzQq_1xWd3"
+    _G.Countdown = 120
+    _G.MaxLimit = 80
+    _G.Render = true
+    _G.Active = true
+    if Name1 then
+        _G.Private = "Us50e0F5OV"
+        _G.BoatPos = Vector3.new(-4053.896, -2, 4628.976)
+    elseif Name2 then
+        _G.Private = "Us50e0F5OV"
+        _G.BoatPost = Vector3.new(-2925.742, -2, 4628.976)
+    end
+    
+    ------------------------------------------------------------------------------------------------------------------------------------|
 ------------------------------------------------------------------------------------------------------| SCRIPT MADED BY YOURSHIGEO <3
 local Version = "3.1"
 
@@ -178,7 +199,6 @@ end
 ------------------------------------------------------------------------------------------------------------------------------------|
 --------------------------------------------------------------------------------------------------------------------| DEBUG UTILITIES
 
-
 setfflag('HumanoidParallelRemoveNoPhysics', 'False')
 setfflag('HumanoidParallelRemoveNoPhysicsNoSimulate2', 'False')
 
@@ -225,3 +245,7 @@ if Game then
         Status = "Done"
     end
 end
+
+end
+
+----------
