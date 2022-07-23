@@ -59,7 +59,7 @@ if Name1 then
     Part.CanCollide = false
     Part.Anchored = true
 
-    local Plr = game.Players.YourShigeo or game.Players.Yalohs or game.Players.P_ZDA
+    local Plr = game.Players.Yalohs
 
     Plr.PlayerChatted:Connect(function(PlayerChatType, sender, message, recipient)
         if message == "!Set" then
