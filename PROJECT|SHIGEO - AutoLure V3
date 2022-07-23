@@ -178,9 +178,9 @@ end
 ------------------------------------------------------------------------------------------------------------------------------------|
 --------------------------------------------------------------------------------------------------------------------| DEBUG UTILITIES
 
-if Teleport then
-    Teleport('HumanoidParallelRemoveNoPhysics', 'False')
-    Teleport('HumanoidParallelRemoveNoPhysicsNoSimulate2', 'False')
+if Teleporting then
+    Teleporting('HumanoidParallelRemoveNoPhysics', 'False')
+    Teleporting('HumanoidParallelRemoveNoPhysicsNoSimulate2', 'False')
 end
 
 task.spawn(function()
