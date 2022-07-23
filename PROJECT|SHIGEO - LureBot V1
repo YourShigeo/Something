@@ -61,21 +61,21 @@ if Name1 then
 
     local Plr = game.Players.Yalohs
 
-    Plr.PlayerChatted:Connect(function(PlayerChatType, sender, message, recipient)
-        if message == "!Set" then
+    Plr.Chatted:Connect(function(Chat)
+        if Chat == "!Set" then
             TweenMovement(HRP,Part,110)
         end
-        if message == "!Fix" then
+        if Chat == "!Fix" then
             local Count = 0
             Part.Position = FPos
             repeat task.wait(0.5) TweenMovement(HRP,Part, 110) Count = Count + 1  until Count == 20
             Part.Position = EPos
             TweenMovement(HRP,Part, 110)
         end
-        if message == "!Reconnect" then
+        if Chat == "!Reconnect" then
             TPMenu()
         end
-        if message == "!Party" then
+        if Chat == "!Party" then
             for i,v in pairs(game.Players:GetPlayers()) do
                 local Event = game:GetService("ReplicatedStorage").Events.PartySystem
                 Event:FireServer({["action"] = "invite", ["ply"] = v})
