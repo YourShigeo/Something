@@ -24,7 +24,7 @@ local Game = game.PlaceId == 7465136166
 local StartPos = Vector3.new(-3694.16, 18.1678, 432.999)
 local FPos = Vector3.new(-4077.764, -1.29, 432.999)
 local SPos = Vector3.new(-4077.764, -1.29, 1909.566)
-local RPos = Vector3.new(-3535.018, -2, 1321.42)
+local RPos = Vector3.new(-3535.018, -2, 1458.782)
 local LPos = Vector3.new(-3535.018, 197.742, 1321.42)
 local EPos = Vector3.new(-3532.144, 197.788, 983.814)
 local StandPos = Vector3.new(-3525.801, 204.348, 1045.413)
