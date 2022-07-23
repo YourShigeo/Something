@@ -178,10 +178,10 @@ end
 ------------------------------------------------------------------------------------------------------------------------------------|
 --------------------------------------------------------------------------------------------------------------------| DEBUG UTILITIES
 
-if Teleporting then
-    setfflag('HumanoidParallelRemoveNoPhysics', 'False')
-    setfflag('HumanoidParallelRemoveNoPhysicsNoSimulate2', 'False')
-end
+
+setfflag('HumanoidParallelRemoveNoPhysics', 'False')
+setfflag('HumanoidParallelRemoveNoPhysicsNoSimulate2', 'False')
+
 
 task.spawn(function()
     wait(_G.Countdown)
