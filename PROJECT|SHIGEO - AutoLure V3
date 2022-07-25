@@ -145,7 +145,6 @@ local function WaitForMob()
         local MobHrp = Mob:WaitForChild('HumanoidRootPart')
         if Mob.Name == "Sea Serpent" and (game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 1500 then
             webhook(_G.Url, "Sea Serpent has been despawned", "Username: " .. Client.Name, Standart)
-            task.wait(5)
             TPMenu()
         elseif Mob.Name == "Kraken" and (game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 500 then
             WColor(Mob.BodyColor.Value)
