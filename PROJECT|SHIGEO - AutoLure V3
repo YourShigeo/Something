@@ -43,14 +43,14 @@ local function TPMenu()
     if _G.Active == true then
         game:GetService"RunService":Stop()
         task.wait(2)
-        game:GetService("TeleportService"):Teleport(1730877806, LocalPlayer)
+        game:GetService("TeleportService"):Teleport(1730877806, Client)
     end
 end
 ---
 
 local function TPPrivate(SERVERCODE)
     game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("reserved"):InvokeServer(SERVERCODE)
-    LocalPlayer:WaitForChild('PlayerGui'):WaitForChild('chooseType'):WaitForChild('Frame'):WaitForChild('RemoteEvent'):FireServer("regular")
+    Client:WaitForChild('PlayerGui'):WaitForChild('chooseType'):WaitForChild('Frame'):WaitForChild('RemoteEvent'):FireServer("regular")
 end
 
 local function Notification(Title,Text,Time)
@@ -145,13 +145,13 @@ local function WaitForMob()
     workspace.NPCs.ChildAdded:Connect(function(Mob)
         local MobHrp = Mob:WaitForChild('HumanoidRootPart')
         if Mob.Name == "Sea Serpent" and (game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 1500 then
-            webhook(_G.Url, "Sea Serpent has been despawned", "Time Elapsed: " .. os.time() - JoinTime .. " seconds " .. "username: " .. Client.Name, Standart)
+            webhook(_G.Url, "Sea Serpent has been despawned", "Username: " .. Client.Name, Standart)
             game:GetService("ReplicatedStorage").Events.KnockedOut:FireServer(unpack({[1] = "self"}))
             task.wait(5)
             TPMenu()
         elseif Mob.Name == "Kraken" and (game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 500 then
             WColor(Mob.BodyColor.Value)
-            webhook(_G.Url, "Kraken has been spawned", "Time Elapsed: " .. os.time() - JoinTime .. " seconds " .. "username: " .. Client.Name, Standart)
+            webhook(_G.Url, "Kraken has been spawned", "Username: " .. Client.Name, Standart)
             Part.Position = RPos
             TweenMovement(HRP,Part,110)
             repeat task.wait() until Teleporting == false
@@ -163,7 +163,7 @@ local function WaitForMob()
             repeat task.wait() until Teleporting == false
             Part.Position = StandPos
             repeat task.wait() TweenMovement(HRP,Part,110) until (game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 250
-            webhook(_G.Url2, "Kraken has been Lured ","Color: " .. Mob.BodyColor.Value .. "\nTotaly spawned: " .. PCount() .. "\nServer code: " .. game.ReplicatedStorage.reservedCode.Value, WColor)
+            webhook(_G.Url2, "Kraken has been Lured ","Color: " .. Mob.BodyColor.Value .. "\nTotaly spawned: " .. PCount() .. "\nTime Elapsed: " .. os.time() - JoinTime .. " seconds " .. "\nServer code: " .. game.ReplicatedStorage.reservedCode.Value, WColor)
             TPMenu()
         end
     end)
