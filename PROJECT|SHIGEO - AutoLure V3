@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------------------------------------------------------------|
 ------------------------------------------------------------------------------------------------------| SCRIPT MADED BY YOURSHIGEO <3
-local Version = "3.55"
+local Version = "3.6"
 
 repeat task.wait() until game:IsLoaded()
 
@@ -168,7 +168,7 @@ local function WaitForMob()
                 TweenMovement(HRP,Part,110)
                 repeat task.wait() until Teleporting == false
                 Part.Position = StandPos
-                repeat task.wait() Part.Position = StandPos task.wait() TweenMovement(HRP,Part,110) task.wait() Part.Position = EPos task.wait() TweenMovement(HRP,Part,110) task.wait() until (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 250
+                repeat task.wait() TweenMovement(HRP,Part,110) until (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 250
                 webhook(_G.Url2, "Kraken has been Lured ","Color: " .. Mob.BodyColor.Value .. "\nTotaly spawned: " .. PCount() .. "\nTime Elapsed: " .. os.time() - JoinTime .. " seconds " .. "\nServer code: " .. game.ReplicatedStorage.reservedCode.Value, WColor)
                 TPMenu()
             end
