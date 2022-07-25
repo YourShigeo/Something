@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------------------------------------------------------------|
 ------------------------------------------------------------------------------------------------------| SCRIPT MADED BY YOURSHIGEO <3
-local Version = "3.55"
+local Version = "3.6"
 
 repeat task.wait() until game:IsLoaded()
 
@@ -41,7 +41,7 @@ Part.Anchored = true
 --------------------------------------------------------------------------------------------------------------------------| FUNCTIONS
 local function TPMenu()
     if _G.Active == true then
-	Client:Kick("Rejoining to menu")
+    Client:Kick("Rejoining to menu")
         game:GetService("TeleportService"):Teleport(1730877806, Client)
     end
 end
@@ -112,18 +112,18 @@ end
 ---
 
 local function TweenMovement(A,B,Speed)
-	task.spawn(function()
+    task.spawn(function()
         Teleporting = true
         tweenService:Create(A, TweenInfo.new(((A.Position - B.Position)).Magnitude / Speed, Enum.EasingStyle.Linear, Enum.EasingDirection.Out),{CFrame = B.CFrame * CFrame.new(0, 0, 0)}):Play()
-		repeat
-			task.wait()
-			game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
-			local magnitude = (A.Position - B.Position).Magnitude
-			if magnitude < 1 then
-				Teleporting = false
-			end
-		until magnitude < 1
-	end)
+        repeat
+            task.wait()
+            game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+            local magnitude = (A.Position - B.Position).Magnitude
+            if magnitude < 1 then
+                Teleporting = false
+            end
+        until magnitude < 1
+    end)
 end
 ---
 local PCount = 0
@@ -138,17 +138,19 @@ local function PCount()
     return PCount
 end
 ---
-
+local Toggler = false
 local function WaitForMob()
+    Toggler = true
     Notification("PROJECT|SHIGEO", "Mob Module has been sucessfully loaded", 3)
     workspace.NPCs.ChildAdded:Connect(function(Mob)
         local MobHrp = Mob:WaitForChild('HumanoidRootPart')
-        if Mob.Name == "Sea Serpent" and (game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 1500 then
+        print((Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude .. " - " .. Mob.Name)
+        if Mob.Name == "Sea Serpent" and (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 500 then
             webhook(_G.Url, "Sea Serpent has been despawned", "Username: " .. Client.Name, Standart)
             game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("KnockedOut"):FireServer("self")
             task.wait(5)
-	    TPMenu()
-        elseif Mob.Name == "Kraken" and (game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 500 then
+        TPMenu()
+        elseif Mob.Name == "Kraken" and (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 500 then
             WColor(Mob.BodyColor.Value)
             webhook(_G.Url, "Kraken has been spawned", "Username: " .. Client.Name, Standart)
             Part.Position = RPos
@@ -161,7 +163,7 @@ local function WaitForMob()
             TweenMovement(HRP,Part,110)
             repeat task.wait() until Teleporting == false
             Part.Position = StandPos
-            repeat task.wait() TweenMovement(HRP,Part,110) until (game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 250
+            repeat task.wait() TweenMovement(HRP,Part,110) until (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 250
             webhook(_G.Url2, "Kraken has been Lured ","Color: " .. Mob.BodyColor.Value .. "\nTotaly spawned: " .. PCount() .. "\nTime Elapsed: " .. os.time() - JoinTime .. " seconds " .. "\nServer code: " .. game.ReplicatedStorage.reservedCode.Value, WColor)
             TPMenu()
         end
@@ -202,7 +204,7 @@ if Game then
         repeat task.wait() until (HRP.Position - StartPos).Magnitude < 50
         wait(1)
         Notification("PROJECT|SHIGEO", "Script Sucessfuly loaded, current version: " .. Version .. "!", 3)
-        WaitForMob()
+        repeat task.wait(0.5) WaitForMob() until Toggler == true
         game.RunService:Set3dRenderingEnabled(_G.Render)
         Status = "Setting up"
         Notification("PROJECT|SHIGEO", Status, 3)
