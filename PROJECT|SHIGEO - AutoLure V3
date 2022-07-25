@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------------------------------------------------------------|
 ------------------------------------------------------------------------------------------------------| SCRIPT MADED BY YOURSHIGEO <3
-local Version = "3.65"
+local Version = "3.66"
 
 repeat task.wait() until game:IsLoaded()
 
@@ -146,15 +146,15 @@ local function WaitForMob()
         local MobHrp = Mob:WaitForChild('HumanoidRootPart')
         print((Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude .. " - " .. Mob.Name)
         if Mob.Name == "Sea Serpent" then
+            repeat task.wait() until (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 500
             if (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 500 then
                 webhook(_G.Url, "Sea Serpent has been despawned", "Username: " .. Client.Name, Standart)
                 game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("KnockedOut"):FireServer("self")
                 task.wait(5)
-            else
-                repeat task.wait() until (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 500
             end
         TPMenu()
         elseif Mob.Name == "Kraken" then
+            repeat task.wait() until (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 500
             if (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 500 then
                 WColor(Mob.BodyColor.Value)
                 webhook(_G.Url, "Kraken has been spawned", "Username: " .. Client.Name, Standart)
@@ -171,8 +171,6 @@ local function WaitForMob()
                 repeat task.wait() TweenMovement(HRP,Part,110) until (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 250
                 webhook(_G.Url2, "Kraken has been Lured ","Color: " .. Mob.BodyColor.Value .. "\nTotaly spawned: " .. PCount() .. "\nTime Elapsed: " .. os.time() - JoinTime .. " seconds " .. "\nServer code: " .. game.ReplicatedStorage.reservedCode.Value, WColor)
                 TPMenu()
-            else
-                repeat task.wait() until (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 500
             end
         end
     end)
