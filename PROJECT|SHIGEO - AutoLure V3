@@ -1,13 +1,6 @@
-_G.Url = "https://discord.com/api/webhooks/995061332787343390/Kjiv52OAVHBmTkjpojPWwCUHz3FXlV_EpiqtsGyerG_cL5iNU2KIGzoKq-32OXBXVWek"
-_G.Url2 = "https://discord.com/api/webhooks/995610048178958366/I6YEYe_1ZD5OT04TIY-HMd6BFWOk35ZqK5hL1Co-W7Y72oYfhv3EU_k6l7AzQq_1xWd3"
-_G.Countdown = 160
-_G.MaxLimit = 80
-_G.Render = false
-_G.Active = true
-
 ------------------------------------------------------------------------------------------------------------------------------------|
 ------------------------------------------------------------------------------------------------------| SCRIPT MADED BY YOURSHIGEO <3
-local Version = "3.3"
+local Version = "3.4"
 
 repeat task.wait() until game:IsLoaded()
 
@@ -48,8 +41,7 @@ Part.Anchored = true
 --------------------------------------------------------------------------------------------------------------------------| FUNCTIONS
 local function TPMenu()
     if _G.Active == true then
-        game:GetService"RunService":Stop()
-        task.wait(2)
+	Client:Kick("Rejoining to menu")
         game:GetService("TeleportService"):Teleport(1730877806, Client)
     end
 end
