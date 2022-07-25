@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------------------------------------------------------------|
 ------------------------------------------------------------------------------------------------------| SCRIPT MADED BY YOURSHIGEO <3
-local Version = "3.51"
+local Version = "3.55"
 
 repeat task.wait() until game:IsLoaded()
 
@@ -145,7 +145,9 @@ local function WaitForMob()
         local MobHrp = Mob:WaitForChild('HumanoidRootPart')
         if Mob.Name == "Sea Serpent" and (game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 1500 then
             webhook(_G.Url, "Sea Serpent has been despawned", "Username: " .. Client.Name, Standart)
-            TPMenu()
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("KnockedOut"):FireServer("self")
+            task.wait(5)
+	    TPMenu()
         elseif Mob.Name == "Kraken" and (game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 500 then
             WColor(Mob.BodyColor.Value)
             webhook(_G.Url, "Kraken has been spawned", "Username: " .. Client.Name, Standart)
@@ -216,7 +218,7 @@ if Game then
         repeat task.wait() until Teleporting == false
         Status = "Spawning boat"
         Notification("PROJECT|SHIGEO", Status, 3)
-        game:GetService("ReplicatedStorage").Events.ShipEvents.Spawn:InvokeServer("true")
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ShipEvents"):WaitForChild("Spawn"):InvokeServer("true")
         Status = "Done"
 
 end
