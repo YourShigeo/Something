@@ -5,7 +5,7 @@ local Version = "3.3"
 repeat task.wait() until game:IsLoaded()
 
 local Players = game:GetService('Players')
-local Client = Players.LocalPlayer or Players:GetPropertyChangedSignal('LocalPlayer'):task.Wait() or Players.LocalPlayer
+local Client = Players.LocalPlayer or Players:GetPropertyChangedSignal('LocalPlayer'):Wait() or Players.LocalPlayer
 local Character = Client.Character or Client.CharacterAdded:Wait()
 local Humanoid = Character:WaitForChild('Humanoid')
 local HRP = Character:WaitForChild('HumanoidRootPart')
