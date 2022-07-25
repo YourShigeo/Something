@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------------------------------------------------------------|
 ------------------------------------------------------------------------------------------------------| SCRIPT MADED BY YOURSHIGEO <3
-local Version = "3.5"
+local Version = "3.51"
 
 repeat task.wait() until game:IsLoaded()
 
@@ -217,7 +217,7 @@ if Game then
         repeat task.wait() until Teleporting == false
         Status = "Spawning boat"
         Notification("PROJECT|SHIGEO", Status, 3)
-        game:GetService("ReplicatedStorage").Events.ShipEvents.Spawn:InvokeServer(true)
+        game:GetService("ReplicatedStorage").Events.ShipEvents.Spawn:InvokeServer("true")
         Status = "Done"
 
 end
