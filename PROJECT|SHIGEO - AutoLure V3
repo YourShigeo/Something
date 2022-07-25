@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------------------------------------------------------------|
 ------------------------------------------------------------------------------------------------------| SCRIPT MADED BY YOURSHIGEO <3
-local Version = "3.67"
+local Version = "3.55"
 
 repeat task.wait() until game:IsLoaded()
 
@@ -146,16 +146,16 @@ local function WaitForMob()
         local MobHrp = Mob:WaitForChild('HumanoidRootPart')
         print((Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude .. " - " .. Mob.Name)
         if Mob.Name == "Sea Serpent" then
-            repeat task.wait() until (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 500
-            if (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 500 then
+            repeat task.wait() until (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 400
+            if (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 400 then
                 webhook(_G.Url, "Sea Serpent has been despawned", "Username: " .. Client.Name, Standart)
                 game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("KnockedOut"):FireServer("self")
                 task.wait(5)
             end
         TPMenu()
         elseif Mob.Name == "Kraken" then
-            repeat task.wait() until (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 500
-            if (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 500 then
+            repeat task.wait() until (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 400
+            if (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 400 then
                 WColor(Mob.BodyColor.Value)
                 webhook(_G.Url, "Kraken has been spawned", "Username: " .. Client.Name, Standart)
                 Part.Position = RPos
@@ -168,7 +168,7 @@ local function WaitForMob()
                 TweenMovement(HRP,Part,110)
                 repeat task.wait() until Teleporting == false
                 Part.Position = StandPos
-                repeat task.wait() TweenMovement(HRP,Part,110) until (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 250
+                repeat task.wait() Part.Position = StandPos task.wait() TweenMovement(HRP,Part,110) task.wait() Part.Position = EPos task.wait() TweenMovement(HRP,Part,110) task.wait() until (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 250
                 webhook(_G.Url2, "Kraken has been Lured ","Color: " .. Mob.BodyColor.Value .. "\nTotaly spawned: " .. PCount() .. "\nTime Elapsed: " .. os.time() - JoinTime .. " seconds " .. "\nServer code: " .. game.ReplicatedStorage.reservedCode.Value, WColor)
                 TPMenu()
             end
@@ -224,7 +224,6 @@ if Game then
         TweenMovement(HRP,Part,110)
         repeat task.wait() until Teleporting == false
         repeat task.wait(0.5) WaitForMob() until Toggler == true
-        task.wait(1)
         Status = "Spawning boat"
         Notification("PROJECT|SHIGEO", Status, 3)
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ShipEvents"):WaitForChild("Spawn"):InvokeServer("true")
