@@ -207,10 +207,7 @@ end)
 ------------------------------------------------------------------------------------------------------------------------| MAIN SCRIPT
 
 if Game then
-    if PCount() > _G.MaxLimit then
-        webhook(_G.Url2, "KRAKENS MAX LIMIT GAINED!!!!!", "Server Code: " .. game.ReplicatedStorage.reservedCode.Value, Standart)
-        _G.Active = false
-    else
+
         repeat task.wait() until (HRP.Position - StartPos).Magnitude < 50
         wait(1)
         Notification("PROJECT|SHIGEO", "Script Sucessfuly loaded, current version: " .. Version .. "!", 3)
@@ -232,7 +229,7 @@ if Game then
         Notification("PROJECT|SHIGEO", Status, 3)
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ShipEvents"):WaitForChild("Spawn"):InvokeServer("true")
         Status = "Done"
-    end
+
 end
 ------------------------------------------------------------------------------------------------------------------------------------|
 ------------------------------------------------------------------------------------------------------------------------------------|
