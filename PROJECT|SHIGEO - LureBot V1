@@ -6,7 +6,8 @@ local Character = Client.Character or Client.CharacterAdded:Wait()
 local Humanoid = Character:WaitForChild('Humanoid')
 local HRP = Character:WaitForChild('HumanoidRootPart')
 local tweenService = game:GetService("TweenService")
-local Name1 = game.Players.LocalPlayer.Name == "YE_ISHE"
+local Active = true
+local Name1 = game.Players.LocalPlayer.Name == "FEMKA_YEBANNAYA"
 _G.Private = "Us50e0F5OV"
 local function TweenMovement(A,B,Speed)
 	task.spawn(function()
@@ -58,34 +59,56 @@ if Name1 then
     Part.Transparency = 1
     Part.CanCollide = false
     Part.Anchored = true
-
-    local Plr = game.Players.Yalohs
-
-    Plr.Chatted:Connect(function(Chat)
-        if Chat == "!Set" then
+    task.spawn(function()
+        while Active == true do
+            task.wait()
             TweenMovement(HRP,Part,110)
-        end
-        if Chat == "!Fix" then
-            local Count = 0
-            Part.Position = FPos
-            repeat task.wait(0.5) TweenMovement(HRP,Part, 110) Count = Count + 1  until Count == 20
-            Part.Position = EPos
-            TweenMovement(HRP,Part, 110)
-        end
-        if Chat == "!Reconnect" then
-            TPMenu()
-        end
-        if Chat == "!Party" then
-            for i,v in pairs(game.Players:GetPlayers()) do
-                local Event = game:GetService("ReplicatedStorage").Events.PartySystem
-                Event:FireServer({["action"] = "invite", ["ply"] = v})
+            if Active == false then
+                break
             end
-
-            game.Players.PlayerAdded:Connect(function(player)
-                local Event = game:GetService("ReplicatedStorage").Events.PartySystem
-                Event:FireServer({["action"] = "invite", ["ply"] = player})
-            end)
         end
     end)
+    game.Players.PlayerAdded:Connect(function(player)
+        player.Chatted:Connect(function(Chat)
+            if Chat == "!Set" then
+                TweenMovement(HRP,Part,110)
+            end
+            if Chat == "!Stop" then
+                Active = false
+            end
+            if Chat == "!Repeat" then
+                Active = true
+                task.spawn(function()
+                    while Active == true do
+                        task.wait()
+                        TweenMovement(HRP,Part,110)
+                        if Active == false then
+                            break
+                        end
+                    end
+                end)
+            end
+            if Chat == "!Fix" then
+                local Count = 0
+                Part.Position = FPos
+                repeat task.wait(0.5) TweenMovement(HRP,Part, 110) Count = Count + 1  until Count == 20
+                Part.Position = EPos
+                TweenMovement(HRP,Part, 110)
+            end
+            if Chat == "!Reconnect" then
+                TPMenu()
+            end
+            if Chat == "!Party" then
+                for i,v in pairs(game.Players:GetPlayers()) do
+                    local Event = game:GetService("ReplicatedStorage").Events.PartySystem
+                    Event:FireServer({["action"] = "invite", ["ply"] = v})
+                end
+    
+                game.Players.PlayerAdded:Connect(function(player)
+                    local Event = game:GetService("ReplicatedStorage").Events.PartySystem
+                    Event:FireServer({["action"] = "invite", ["ply"] = player})
+                end)
+            end
+        end)
+    end)
 end
-
