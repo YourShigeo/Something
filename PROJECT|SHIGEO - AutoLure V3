@@ -126,7 +126,7 @@ local function TweenMovement(A,B,Speed)
     end)
 end
 ---
-local FCound = 0
+
 local PCount = 0
 local function PCount()
     PCount = 0
@@ -170,13 +170,7 @@ local function WaitForMob()
                 repeat task.wait() until Teleporting == false
                 Part.Position = StandPos
                 repeat task.wait() TweenMovement(HRP,Part,110) until (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 250
-                local children = workspace.NPCs:GetChildren()
-                for i = 1, #children do
-                    if children[i].Name == "Kraken" then
-                        FCount = FCount + 1
-                    end
-                end
-                webhook(_G.Url2, "Kraken has been Lured ","Color: " .. Mob.BodyColor.Value .. "\nTotaly spawned: " .. FCound .. "\nTime Elapsed: " .. os.time() - JoinTime .. " seconds " .. "\nServer code: " .. game.ReplicatedStorage.reservedCode.Value, WColor)
+                webhook(_G.Url2, "Kraken has been Lured ","Color: " .. Mob.BodyColor.Value .. "\nTotaly spawned: " .. PCount() .. "\nTime Elapsed: " .. os.time() - JoinTime .. " seconds " .. "\nServer code: " .. game.ReplicatedStorage.reservedCode.Value, WColor)
                 TPMenu()
             end
         end
