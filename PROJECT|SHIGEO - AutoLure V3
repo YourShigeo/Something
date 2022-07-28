@@ -213,7 +213,7 @@ end)
 ------------------------------------------------------------------------------------------------------------------------| MAIN SCRIPT
 
 if Game then
-    if PCount > _G.MaxLimit then
+    if PCount() > _G.MaxLimit then
         webhook(_G.Url2, "KRAKENS MAX LIMIT GAINED!!!!!", "Server Code: " .. game.ReplicatedStorage.reservedCode.Value, Standart)
         _G.Active = false
     else
