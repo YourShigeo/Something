@@ -126,14 +126,11 @@ local function TweenMovement(A,B,Speed)
     end)
 end
 ---
-
-local PCount = 0
 local function PCount()
-    PCount = 0
-    local children = workspace.NPCs:GetChildren()
-    for i = 1, #children do
-        if children[i].Name == "Kraken" then
-            PCount = PCount + 1
+    local PCount = 0
+    for _, NPC in pairs(workspace:WaitForChild('NPCs'):GetChildren()) do
+        if NPC.Name == 'Kraken' then
+            PCount += 1
         end
     end
     return PCount
@@ -170,7 +167,7 @@ local function WaitForMob()
                 repeat task.wait() until Teleporting == false
                 Part.Position = StandPos
                 repeat task.wait() TweenMovement(HRP,Part,110) until (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 250
-                webhook(_G.Url2, "Kraken has been Lured ","Color: " .. Mob.BodyColor.Value .. "\nTotaly spawned: " .. "Artur dont sleep" .. "\nTime Elapsed: " .. os.time() - JoinTime .. " seconds " .. "\nServer code: " .. game.ReplicatedStorage.reservedCode.Value, WColor)
+                webhook(_G.Url2, "Kraken has been Lured ","Color: " .. Mob.BodyColor.Value .. "\nTotaly spawned: " .. PCount() .. "\nTime Elapsed: " .. os.time() - JoinTime .. " seconds " .. "\nServer code: " .. game:GetService("ReplicatedStorage"):WaitForChild("reservedCode").Value, WColor)
                 TPMenu()
             end
         end
@@ -207,10 +204,10 @@ end)
 ------------------------------------------------------------------------------------------------------------------------| MAIN SCRIPT
 
 if Game then
-   if PCount() > _G.MaxLimit then
-       webhook(_G.Url, "MAX LIMIT GAINED", "Username: " .. Client.Name, Standart)
-      _G.Active = false
-   else
+    if PCount() > _G.MaxLimit then
+        webhook(_G.Url2, "KRAKENS MAX LIMIT GAINED!!!!!", "Server Code: " .. game:GetService("ReplicatedStorage"):WaitForChild("reservedCode").Value, Standart)
+        _G.Active = false
+    else
         repeat task.wait() until (HRP.Position - StartPos).Magnitude < 50
         wait(1)
         Notification("PROJECT|SHIGEO", "Script Sucessfuly loaded, current version: " .. Version .. "!", 3)
@@ -232,7 +229,7 @@ if Game then
         Notification("PROJECT|SHIGEO", Status, 3)
         game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ShipEvents"):WaitForChild("Spawn"):InvokeServer("true")
         Status = "Done"
-   end
+    end
 end
 ------------------------------------------------------------------------------------------------------------------------------------|
 ------------------------------------------------------------------------------------------------------------------------------------|
