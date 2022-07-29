@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------------------------------------------------------------|
 ------------------------------------------------------------------------------------------------------| SCRIPT MADED BY YOURSHIGEO <3
-local Version = "3.6"
+local Version = "3.7"
 
 repeat task.wait() until game:IsLoaded()
 
@@ -154,21 +154,46 @@ local function WaitForMob()
         elseif Mob.Name == "Kraken" then
             repeat task.wait() until (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 400
             if (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 400 then
-                WColor(Mob.BodyColor.Value)
-                webhook(_G.Url, "Kraken has been spawned", "Username: " .. Client.Name, Standart)
-                Part.Position = RPos
-                TweenMovement(HRP,Part,110)
-                repeat task.wait() until Teleporting == false
-                Part.Position = LPos
-                TweenMovement(HRP,Part,110)
-                repeat task.wait() until Teleporting == false
-                Part.Position = EPos
-                TweenMovement(HRP,Part,110)
-                repeat task.wait() until Teleporting == false
-                Part.Position = StandPos
-                repeat task.wait() TweenMovement(HRP,Part,110) until (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 250
-                webhook(_G.Url2, "Kraken has been Lured ","Color: " .. Mob.BodyColor.Value .. "\nTotaly spawned: " .. PCount() .. "\nTime Elapsed: " .. os.time() - JoinTime .. " seconds " .. "\nServer code: " .. game:GetService("ReplicatedStorage"):WaitForChild("reservedCode").Value, WColor)
-                TPMenu()
+                if _G.Colors == true and Mob:WaitForChild("BodyColor").Value == "Azure" or "Purple" or "Blue" or "Green" then
+                        print("ASSSS")
+                        WColor(Mob.BodyColor.Value)
+                        webhook(_G.Url, "Kraken has been spawned", "Username: " .. Client.Name, Standart)
+                        Part.Position = RPos
+                        TweenMovement(HRP,Part,110)
+                        repeat task.wait() until Teleporting == false
+                        Part.Position = LPos
+                        TweenMovement(HRP,Part,110)
+                        repeat task.wait() until Teleporting == false
+                        Part.Position = EPos
+                        TweenMovement(HRP,Part,110)
+                        repeat task.wait() until Teleporting == false
+                        Part.Position = StandPos
+                        repeat task.wait() TweenMovement(HRP,Part,110) until (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 250
+                        webhook(_G.Url2, "Kraken has been Lured ","Color: " .. Mob:WaitForChild("BodyColor").Value .. "\nTotaly spawned: " .. PCount() .. "\nTime Elapsed: " .. os.time() - JoinTime .. " seconds " .. "\nServer code: " .. game:GetService("ReplicatedStorage"):WaitForChild("reservedCode").Value, WColor)
+                        TPMenu()
+                elseif _G.Colors == false then
+                    print("NOOO")
+                    WColor(Mob:WaitForChild("BodyColor").Value)
+                    webhook(_G.Url, "Kraken has been spawned", "Username: " .. Client.Name, Standart)
+                    Part.Position = RPos
+                    TweenMovement(HRP,Part,110)
+                    repeat task.wait() until Teleporting == false
+                    Part.Position = LPos
+                    TweenMovement(HRP,Part,110)
+                    repeat task.wait() until Teleporting == false
+                    Part.Position = EPos
+                    TweenMovement(HRP,Part,110)
+                    repeat task.wait() until Teleporting == false
+                    Part.Position = StandPos
+                    repeat task.wait() TweenMovement(HRP,Part,110) until (Character.HumanoidRootPart.Position - MobHrp.Position).Magnitude < 250
+                    webhook(_G.Url2, "Kraken has been Lured ","Color: " .. Mob:WaitForChild("BodyColor").Value .. "\nTotaly spawned: " .. PCount() .. "\nTime Elapsed: " .. os.time() - JoinTime .. " seconds " .. "\nServer code: " .. game:GetService("ReplicatedStorage"):WaitForChild("reservedCode").Value, WColor)
+                    TPMenu()
+                else
+                    print("fuck")
+                    webhook(_G.Url, Mob:WaitForChild("BodyColor").Value .. " Kraken has been despawned", "Username: " .. Client.Name, Standart)
+                    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("KnockedOut"):FireServer("self")
+                    task.wait(5)
+                end
             end
         end
     end)
