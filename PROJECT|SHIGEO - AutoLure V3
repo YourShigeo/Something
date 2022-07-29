@@ -209,6 +209,7 @@ end)
 if Game then
    if PCount() > _G.MaxLimit then
        webhook(_G.Url, "MAX LIMIT GAINED", "Username: " .. Client.Name, Standart)
+      _G.Active = false
    else
         repeat task.wait() until (HRP.Position - StartPos).Magnitude < 50
         wait(1)
