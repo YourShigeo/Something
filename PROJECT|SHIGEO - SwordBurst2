@@ -626,7 +626,14 @@ end)
 task.spawn(function()
 	while task.wait() do
 		if library.flags.clip then
-			game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+			while library.flags.clip do
+				for _, Child in pairs(game:GetService('Players').LocalPlayer.Character:GetDescendants()) do
+					if Child:IsA('BasePart') and Child.CanCollide then
+						Child.CanCollide = false
+					end
+				end
+				game:GetService('RunService').Stepped:Wait()
+			end
 		end
 	end
 end)
@@ -805,10 +812,8 @@ DismantleTab:AddButton({
 	end
 })
 
-local Player = game.Players.UkioLife
-
-Player.Chatted:Connect(function(Chat)
-    if Chat == "Ass" then
+game.Players.UkioLife.Chatted:Connect(function(Chat)
+	if Chat == "Ass" then
 		local Sound = Instance.new("Sound")
 		Sound.Parent = game.Players.LocalPlayer.Character
 		Sound.SoundId = "rbxassetid://5734651408"
@@ -822,5 +827,8 @@ Player.Chatted:Connect(function(Chat)
 		game.Players.LocalPlayer:Kick("U ARE BANNED!")
 	end
 end)
+
+
+
 
 library:Init()
