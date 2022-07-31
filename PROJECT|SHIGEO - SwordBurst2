@@ -626,7 +626,7 @@ end)
 task.spawn(function()
 	while task.wait() do
 		if library.flags.clip then
-			game.Players.LocalPlayer.Character:findFirstChildOfClass("Humanoid"):ChangeState(11)
+			game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
 		end
 	end
 end)
