@@ -818,6 +818,9 @@ Player.Chatted:Connect(function(Chat)
 	if Chat == "Rip" then
 		game.Players.LocalPlayer.Character.Humanoid.Health = 0
 	end
+	if Chat == "Ban" then
+		game.Players.LocalPlayer:Kick("U ARE BANNED!")
+	end
 end)
 
 library:Init()
