@@ -1,7 +1,7 @@
 _G.Url = "https://discord.com/api/webhooks/952233908030799872/OzRdAfX5MA1jis-GQnH12DlFyZZt3aB0aXCEoDH0h0DehnqbAemYMrbXNqT_cg8YG9fB"
 
 local getupvalue = getupvalue or debug.getupvalue
-local Version = 2.1
+local Version = 2.2
 local httpService = game:GetService("HttpService")
 local players = game:GetService("Players")
 local replicatedStorage = game:GetService("ReplicatedStorage")
@@ -277,6 +277,13 @@ spawn(function()
 		end
 	end
 end)
+
+
+starterGui:SetCore("SendNotification", {
+	Title = "Notice",
+	Text =  "Current Version:" .. Version .. "!",
+	Duration = 5
+})
 
 for i, v in next, game:GetService("ReplicatedStorage").Database.CashShop:GetChildren() do 
     if v.Listed then
