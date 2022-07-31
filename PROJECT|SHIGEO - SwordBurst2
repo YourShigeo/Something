@@ -1,0 +1,808 @@
+_G.Url = "https://discord.com/api/webhooks/952233908030799872/OzRdAfX5MA1jis-GQnH12DlFyZZt3aB0aXCEoDH0h0DehnqbAemYMrbXNqT_cg8YG9fB"
+
+local getupvalue = getupvalue or debug.getupvalue
+
+local httpService = game:GetService("HttpService")
+local players = game:GetService("Players")
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local tweenService = game:GetService("TweenService")
+local starterGui = game:GetService("StarterGui")
+local client = players.LocalPlayer
+
+local runService = game:GetService("RunService")
+local heartbeat = runService.heartbeat
+
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/LegoHacks/Utilities/main/UI.lua"))()
+local moderators = game:HttpGet("https://raw.githubusercontent.com/LegoHacks/Swordburst-2/main/Moderators.txt"):split("\n")
+
+-- Main Script
+
+local mobs = {
+	[542351431] = {
+		"Frenzy Boar",
+		"Hermit Crab",
+		"Wolf",
+		"Bear",
+		"Ruin Knight",
+		"Draconite",
+		"Ruin Kobold Knight",
+		"Dire Wolf",
+		"Rahjin the Thief King",
+	},
+
+	[548231754] = {
+		"Leaf Beetle",
+		"Leaf Ogre",
+		"Leafray",
+		"Pearl Keeper",
+		"Pearl Guardian",
+		"Wasp",
+		"Bushback Tortoise",
+		"Gorrock the Grove Protector",
+		"Borik the BeeKeeper",
+	},
+
+	[555980327] = {
+		"Snowgre",
+		"Angry Snowman",
+		"Icewhal",
+		"Alpha Icewhal",
+		"Snowhorse",
+		"Ice Elemental",
+		"Ice Walker",
+		"Qerach The Forgotten Golem",
+		"Ra'thae the Ice King",
+	},
+
+	[572487908] = {
+		"Wattlechin Crocodile",
+		"Bamboo Spiderling",
+		"Treeray",
+		"Birchman",
+		"Treehorse",
+		"Boneling",
+		"Dungeon Dweller",
+		"Bamboo Spider",
+		"Lion Protector",
+		"Rotling",
+		"Irath the Lion",
+	},
+
+	[580239979] = {
+		"Girdled Lizard",
+		"Angry Cactus",
+		"Desert Vulture",
+		"Giant Centipede",
+		"Sand Scorpion",
+		"Green Patrolman",
+		"Patrolman Elite",
+		"Centaurian Defender",
+		"Fire Scorpion",
+		"Sa'jun the Centurian Chieftain",
+	},
+
+	[582198062] = {
+		"Jelly Wisp",
+		"Firefly",
+		"Shroom Back Clam",
+		"Gloom Shroom",
+		"Gloom Shroom",
+		"Horned Sailfin Iguana",
+		"Blightmouth",
+		"Snapper",
+		"Frogazoid",
+		"Smashroom",
+	},
+
+	[548878321] = {
+		"Giant Praying Mantis",
+		"Petal Knight",
+		"Leaf Rhino",
+		"Sky Raven",
+		"Forest Wanderer",
+		"Wingless Hippogriff",
+		"Dungeon Crusador",
+		"Hippogriff",
+		"Formaug the Jungle Giant",
+	},
+
+	[573267292] = {
+		"Batting Eye",
+		"Lingerer",
+		"Fishrock Spider",
+		"Reptasaurus",
+		"Ent",
+		"Undead Warrior",
+		"Polyserpant",
+		"Undead Berserker",
+		"Gargoyle Reaper",
+		"Mortis the Flaming Sear",
+	},
+
+	[2659143505] = {
+		"Grunt",
+		"Guard Hound",
+		"Minion",
+		"Shady Villager",
+		"Clay Giant",
+		"Undead Servant",
+		"Winged Minion",
+		"Wendigo",
+		"Baal  The  Tormentor",
+		"Grim  the  Overseer"
+	},
+
+	[5287433115] = {
+		"Reaper",
+		"Elite Reaper",
+		"DJ Reaper",
+		"Sentry",
+		"Watcher",
+		"Soul Eater",
+		"Command Falcon",
+		"Amageddon Eagle",
+		"Shadow Figure",
+		"Meta Figure",
+		"???????",
+		"Rogue Android",
+		"Wa, the Curious",
+		"Duality Reaper",
+		"Za, the Eldest",
+		"Ra, the Enlightener",
+		"Ka, the Mischief",
+		"Da, the Demeanor",
+		"Saurus, the All-Seeing",
+	},
+
+	[6144637080] = { -- Winter event
+		"Evergreen Sentinel",
+		"Crystalite",
+		"Gemulite",
+		"Icy Imp",
+	}
+}
+
+local bosses = {
+	[542351431] = {
+		"Dire Wolf",
+		"Rahjin the Thief King",
+	},
+
+	[548231754] = {
+		"Borik the BeeKeeper",
+		"Gorrock the Grove Protector",
+	},
+
+	[555980327] = {
+		"Ra'thae the Ice King",
+		"Qerach The Forgotten Golem",
+	},
+
+	[572487908] = {
+		"Irath the Lion",
+		"Rotling",
+	},
+
+	[580239979] = {
+		"Fire Scorpion",
+		"Sa'jun the Centurian Chieftain",
+	},
+
+	[582198062] = {
+		"Frogazoid",
+		"Smashroom",
+	},
+
+	[548878321] = {
+		"Hippogriff",
+		"Formaug the Jungle Giant",
+	},
+
+	[573267292] = {
+		"Gargoyle Reaper",
+		"Mortis the Flaming Sear",
+		"Polyserpant",
+	},
+
+	[2659143505] = {
+		"Baal  The  Tormentor",
+		"Grim  the  Overseer",
+	},
+
+	[5287433115] = {
+		"Wa, the Curious",
+		"Duality Reaper",
+		"Za, the Eldest",
+		"Ra, the Enlightener",
+		"Ka, the Mischief",
+		"Da, the Demeanor",
+		"Saurus, the All-Seeing",
+	},
+
+	[6144637080] = { -- Winter event
+		"Wintula the Punisher",
+	},
+}
+
+local function getClosestMob()
+	local distance, mob = math.huge
+	for i, v in next, workspace.Mobs:GetChildren() do
+		if (v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Nameplate") and v.PrimaryPart and v.Parent and v:FindFirstChild("Entity") and v.Entity.Health.Value > 0) then
+			if (library.flags.bosses) then
+				for a, b in next, bosses[game.PlaceId] do
+					if (b == v.Name) then
+						return v
+					end
+				end
+			end
+
+			local distanceFromChar = client:DistanceFromCharacter(v.HumanoidRootPart.Position)
+			if (distanceFromChar < distance) then
+				if (library.flags.chosen_mob and v.Name == library.flags.chosen_mob) then
+					distance = distanceFromChar
+					mob = v
+				end
+			end
+		end
+	end
+
+	return mob
+end
+
+
+
+for i, v in next, players:GetPlayers() do
+	if (table.find(moderators, tostring(v.UserId))) then
+		return client:Kick("\n[Moderator Detected]\n" .. v.Name)
+	end
+end
+
+players.PlayerAdded:Connect(function(player)
+	if (table.find(moderators, tostring(player.UserId))) then
+		return client:Kick("\n[Moderator Detected]\n" .. player.Name)
+	end
+end)
+
+spawn(function()
+	for i, v in next, moderators do
+		if (v == "") then continue end
+
+		local res = httpService:JSONDecode(game:HttpGet("https://api.roblox.com/users/" .. v .. "/onlinestatus/"))
+		if (res.IsOnline) then
+			starterGui:SetCore("SendNotification", {
+				Title = "Notice",
+				Text = players:GetNameFromUserIdAsync(v) .. " is online, be careful!",
+				Duration = 5
+			})
+		end
+	end
+end)
+
+for i, v in next, game:GetService("ReplicatedStorage").Database.CashShop:GetChildren() do 
+    if v.Listed then
+       v.Listed.Value = true
+    end
+end
+
+if (getconnections) then
+	for i, v in next, getconnections(client.Idled) do
+		v:Disable()
+	end
+else
+	local vu = game:GetService("VirtualUser")
+	client.Idled:Connect(function()
+		vu:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+		wait(1)
+		vu:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+	end)
+end
+
+local AuraTab = library:CreateWindow("Kill Aura")
+
+AuraTab:AddToggle({
+	text = "Sword Aura",
+	flag = "swordaura"
+})
+
+AuraTab:AddSlider({
+	text = "Attack Range",
+	flag = "attack_range",
+	min = 10,
+	max = 60
+})
+
+AuraTab:AddToggle({
+	text = "Skill Aura",
+	flag = "skillaura"
+})
+
+AuraTab:AddToggle({
+	text = "Combined Aura",
+	flag = "combaura"
+})
+AuraTab:AddList({
+	text = "Skill for aura",
+	flag = "skillstouse",
+	values = {"Leaping Slash","Sweeping Strike","Whirlwind Spin","Downward Smash","Piercing Dash","Summon Pistol"}
+})
+
+local autoFarmTab = library:CreateWindow("Auto Farm")
+
+autoFarmTab:AddToggle({
+	text = "Enabled",
+	flag = "autofarming"
+})
+
+autoFarmTab:AddToggle({
+	text = "Prioritise Bosses",
+	flag = "bosses"
+})
+
+autoFarmTab:AddSlider({
+	text = "Adjust Radius",
+	flag = "dist",
+	min = 400,
+	max = 5000
+})
+
+autoFarmTab:AddSlider({
+	text = "Adjust Y",
+	flag = "Y_point",
+	min = 15,
+	max = 40
+})
+
+autoFarmTab:AddSlider({
+	text = "Tween Speed",
+	flag = "tween_speed",
+	min = 20,
+	max = 50
+})
+
+autoFarmTab:AddList({
+	text = "Chosen Mob",
+	flag = "chosen_mob",
+	values = mobs[game.PlaceId]
+})
+
+local miscTab = library:CreateWindow("Misc")
+
+local Teleports = {
+	[542351431] = {--1
+		["Boss"] = Vector3.new(-1938.36, 428.031, 795.364),
+		["MiniBoss"] = Vector3.new(-1938.36, 428.031, 795.364)
+	},
+	[548231754] = {--2
+		["Boss"] = Vector3.new(-2942.99, 201.361, -9806.74),
+		["MiniBoss"] = Vector3.new(-2942.99, 201.361, -9804.74)
+	},
+	[555980327] = {--3
+		["Boss"] = Vector3.new(448.331, 4279.34, -385.05),
+		["MiniBoss"] = Vector3.new(448.331, 4279.34, -385.05)
+	},
+	[572487908] = {--4
+		["Boss"] = Vector3.new(-2318.13, 2280.42, -514.068),
+		["MiniBoss"] = Vector3.new(-2318.13, 2280.42, -514.068)
+	},
+	[580239979] = {--5
+	["Boss"] = Vector3.new(2192.09, 1297.94, -118.209),
+	["MiniBoss"] = Vector3.new(-2318.13, 2280.42, -514.068)
+},
+	[582198062] = {--7
+		["Boss"] = Vector3.new(3347.79, 800.044, -804.31),
+		["MiniBoss"] = Vector3.new(3347.79, 800.044, -804.31)
+	},
+	[548878321] = {--8
+		["Boss"] = Vector3.new(1848.35, 4110.44, 7723.64),
+		["MiniBoss"] = Vector3.new(-807.37, 3174.72, -940.97)
+	},
+	[573267292] = {--9
+		["Boss"] = Vector3.new(12241.5, 461.776, -3655.09),
+		["MiniBoss"] = Vector3.new(-255.197, 3077.04, -4604.19)
+	},
+	[2659143505] = {--10
+		["Boss"] = Vector3.new(46.203,1000.054, 25432.576),
+		["MiniBoss"] = Vector3.new(-891.988, 460.097, 6503.85)
+	},
+	[5287433115] = {--11
+		["Boss"] = Vector3.new(5224.19, 2602.94, 6438.45),
+		["MiniBoss1"] = Vector3.new(4001.56, 421.515, -3794.2),
+		["MiniBoss2"] = Vector3.new(4763.07, 501.714, -4344.84),
+		["MiniBoss3"] = Vector3.new(4801.13, 1646.3, 2083.19),
+	},
+}
+
+local valuess = nil
+
+if game.PlaceId == 5287433115 then
+	valuess = {"Boss", "MiniBoss1", "MiniBoss2", "MiniBoss3"}
+else
+	valuess = {"Boss","MiniBoss"}
+end
+
+miscTab:AddList({
+	text = "Choose",
+	flag = "tpchoose",
+	values = valuess
+})
+
+miscTab:AddButton({
+	text = "Teleport",
+	callback = function()
+		game.Players.LocalPlayer.Character:MoveTo(Teleports[game.PlaceId][library.flags.tpchoose])
+	end
+})
+
+miscTab:AddSlider({
+	text = "Speed",
+	flag = "chosen_speed",
+	min = 20,
+	max = 80
+})
+
+miscTab:AddToggle({
+	text = "Fly",
+	flag = "fly"
+})
+
+miscTab:AddToggle({
+	text = "Noclip",
+	flag = "clip"
+})
+
+miscTab:AddButton({
+	text = "Go Invisible",
+	callback = function()
+		if (client.Character and client.Character:FindFirstChild("LowerTorso")) then
+			local root = client.character.LowerTorso.Root:Clone()
+			client.character.LowerTorso.Root:Destroy()
+			root.Parent = client.character.LowerTorso
+			for _, part in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+				pcall(function()
+					part.Transparency = 0.9
+				end)
+			end
+			game.Players.LocalPlayer.Character.HumanoidRootPart.Transparency = 0.2
+		end
+	end
+})
+
+miscTab:AddButton({
+	text = "Show all invisible",
+	callback = function()
+		for _,plrs in pairs(game.Players:GetPlayers()) do
+			if (plrs.Character.HumanoidRootPart.Position - plrs.Character.UpperTorso.Position).magnitude >= 20 then
+				local g = Instance.new("BillboardGui")
+				g.Adornee = plrs.Character.HumanoidRootPart
+				g.Size = UDim2.new(10,0,2,0)
+				g.StudsOffset = Vector3.new(0,1.5,0)
+				g.Parent = plrs.Character.HumanoidRootPart
+				local t = Instance.new("TextLabel")
+				t.Parent = g
+				t.Size = UDim2.new(1,0,1,0)
+				t.Font = "SciFi"
+				t.RichText = true
+				t.Text = plrs.Name
+				t.LineHeight = 1
+				t.MaxVisibleGraphemes = -1
+				t.TextSize = 6
+				t.TextStrokeTransparency = 0.5
+				t.TextScaled = true
+				t.BackgroundTransparency = 1
+				t.BorderSizePixel = 0
+				plrs.Character.HumanoidRootPart.Transparency = 0
+			end
+		end
+	end
+})
+miscTab:AddToggle({
+	text = "Webhook",
+	flag = "hook"
+})
+local Render = true
+miscTab:AddButton({
+	text = "Disable 3d render",
+	callback = function ()
+		if Render == true then
+			Render = false
+			game.RunService:Set3dRenderingEnabled(Render)
+		else
+			Render = true
+			game.RunService:Set3dRenderingEnabled(Render)
+		end
+	end
+})
+
+heartbeat:Connect(function()
+	if (client.Character and library.flags.autofarming) then
+		for i, v in next, client.Character:GetChildren() do
+			if (v:IsA("BasePart")) then
+				v.CanCollide = false
+			end
+		end
+	end
+end)
+
+local plr = game.Players.LocalPlayer
+local mouse = plr:GetMouse()
+local Camera = workspace.CurrentCamera
+
+local deb = true
+local ctrl = {f = 0, b = 0, l = 0, r = 0}
+local lastctrl = {f = 0, b = 0, l = 0, r = 0}
+local maxspeed = 50
+local speed = 0
+
+function Fly()
+	local UpperTorso = plr.Character.UpperTorso
+	local bg = Instance.new("BodyGyro", UpperTorso)
+	bg.P = 9e4
+	bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+	bg.cframe = UpperTorso.CFrame
+	local bv = Instance.new("BodyVelocity", UpperTorso)
+	bv.velocity = Vector3.new(0, 0.1, 0)
+	bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
+	repeat
+		wait()
+		if library.flags.fly then
+			plr.Character.Humanoid.PlatformStand = true
+			if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
+				speed = speed + .5 + (speed / maxspeed)
+				if speed > maxspeed then
+					speed = maxspeed
+				end
+			elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
+				speed = speed - 1
+				if speed < 0 then
+					speed = 0
+				end
+			end
+			if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
+				bv.velocity =
+					((Camera.CoordinateFrame.lookVector * (ctrl.f + ctrl.b)) +
+						((Camera.CoordinateFrame *
+							CFrame.new(ctrl.l + ctrl.r, (ctrl.f + ctrl.b) * .2, 0).p) -
+							Camera.CoordinateFrame.p)) *
+					speed
+				lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
+			elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
+				bv.velocity =
+					((Camera.CoordinateFrame.lookVector * (lastctrl.f + lastctrl.b)) +
+						((Camera.CoordinateFrame *
+							CFrame.new(lastctrl.l + lastctrl.r, (lastctrl.f + lastctrl.b) * .2, 0).p) -
+							Camera.CoordinateFrame.p)) *
+					speed
+			else
+				bv.velocity = Vector3.new(0, 0.1, 0)
+			end
+			bg.cframe =
+				Camera.CoordinateFrame *
+				CFrame.Angles(-math.rad((ctrl.f + ctrl.b) * 50 * speed / maxspeed), 0, 0)
+		end
+	until not library.flags.fly
+	ctrl = {f = 0, b = 0, l = 0, r = 0}
+	lastctrl = {f = 0, b = 0, l = 0, r = 0}
+	speed = 0
+	bg:Destroy()
+	bv:Destroy()
+	plr.Character.Humanoid.PlatformStand = false
+end
+
+mouse.KeyDown:connect(function(key)
+	if key:lower() == "w" then
+		ctrl.f = 1
+	elseif key:lower() == "s" then
+		ctrl.b = -1
+	elseif key:lower() == "a" then
+		ctrl.l = -1
+	elseif key:lower() == "d" then
+		ctrl.r = 1
+	end
+end)
+mouse.KeyUp:connect(function(key)
+	if key:lower() == "w" then
+		ctrl.f = 0
+	elseif key:lower() == "s" then
+		ctrl.b = 0
+	elseif key:lower() == "a" then
+		ctrl.l = 0
+	elseif key:lower() == "d" then
+		ctrl.r = 0
+	end
+end)
+
+
+
+
+task.spawn(function()
+	while true do
+		if library.flags.fly then
+			Fly()
+		end
+		wait()
+	end
+end)
+
+task.spawn(function()
+	while task.wait() do
+		if library.flags.clip then
+			game.Players.LocalPlayer.Character:findFirstChildOfClass("Humanoid"):ChangeState(11)
+		end
+	end
+end)
+task.spawn(function()
+	while true do
+		if (library.flags.autofarming) then
+			local mob = getClosestMob()
+
+			if (mob) then
+				if (library.flags.autofarming) then
+					local mob = getClosestMob()
+					
+					if (mob) then
+						if client:DistanceFromCharacter(mob.HumanoidRootPart.Position) < library.flags.dist then
+							pcall(function()
+								setfflag("HumanoidParallelRemoveNoPhysics", "False")
+								setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
+						
+								client.Character.Humanoid:ChangeState(11)
+								tweenService:Create(client.Character.HumanoidRootPart, TweenInfo.new(((client.Character.HumanoidRootPart.Position - mob.HumanoidRootPart.Position)).Magnitude / library.flags.tween_speed), {CFrame = mob.PrimaryPart.CFrame * CFrame.new(0, library.flags.Y_point, 0)}):Play()
+							end)
+						end
+					end
+				end
+			end
+		end
+		wait()
+	end
+end)
+
+task.spawn(function()
+	while task.wait() do 
+		client.Character.Humanoid.WalkSpeed = (library.flags.chosen_speed or 20);
+	end
+end)
+task.spawn(function()
+    while task.wait() do 
+            if library.flags.swordaura then
+            for _, mob in next, workspace.Mobs:GetChildren() do 
+                if mob:FindFirstChild("HumanoidRootPart") and mob:FindFirstChild("Nameplate") and mob.PrimaryPart and mob.Parent and mob:FindFirstChild("Entity") and mob.Entity.Health.Value > 0 then
+                    if client:DistanceFromCharacter(mob.HumanoidRootPart.Position) < library.flags.attack_range then
+                        game.ReplicatedStorage.Event:FireServer("Combat", { '\204', '\214', '\177', '\251' }, { 'Attack', nil, '1', mob })
+                    end
+                end
+            end
+            task.wait(0.3)
+        end
+    end
+end)
+
+task.spawn(function()
+    while task.wait() do 
+            if library.flags.skillaura then
+            for _, mob in next, workspace.Mobs:GetChildren() do 
+                if mob:FindFirstChild("HumanoidRootPart") and mob:FindFirstChild("Nameplate") and mob.PrimaryPart and mob.Parent and mob:FindFirstChild("Entity") and mob.Entity.Health.Value > 0 then
+                    if client:DistanceFromCharacter(mob.HumanoidRootPart.Position) < library.flags.attack_range then
+                        game.ReplicatedStorage.Event:FireServer("Skills", {'UseSkill',library.flags.skillstouse,{["Direction"] = Vector3.new(0,0,0)}})
+						game.ReplicatedStorage.Event:FireServer("Combat", { '\204', '\214', '\177', '\251' }, { 'Attack', library.flags.skillstouse, '1', mob })
+                    end
+                end
+            end
+            task.wait(0.3)
+        end
+    end
+end)
+local SkillA = false
+local SwordA = false
+
+task.spawn(function()
+	while task.wait() do
+		if library.flags.combaura then
+			for _, mob in next, workspace.Mobs:GetChildren() do 
+                if mob:FindFirstChild("HumanoidRootPart") and mob:FindFirstChild("Nameplate") and mob.PrimaryPart and mob.Parent and mob:FindFirstChild("Entity") and mob.Entity.Health.Value > 0 then
+                    if client:DistanceFromCharacter(mob.HumanoidRootPart.Position) < library.flags.attack_range then
+						if client.Character.Entity.Stamina.Value >= 100 then
+							SkillA = true
+							SwordA = false
+						end
+						if client.Character.Entity.Stamina.Value <= 20 then
+							SkillA = false
+							SwordA = true
+						end
+						if SkillA == true then
+							game.ReplicatedStorage.Event:FireServer("Skills", {'UseSkill',library.flags.skillstouse,{["Direction"] = Vector3.new(0,0,0)}})
+							game.ReplicatedStorage.Event:FireServer("Combat", { '\204', '\214', '\177', '\251' }, { 'Attack', library.flags.skillstouse, '1', mob })
+						end
+						if SwordA == true then
+							game.ReplicatedStorage.Event:FireServer("Combat", { '\204', '\214', '\177', '\251' }, { 'Attack', nil, '1', mob })
+						end
+                    end
+                end
+            end	
+		end
+		task.wait(0.3)
+	end
+end)
+
+local DismantleTab = library:CreateWindow("Dismantle Tab")
+
+local mainmodule = nil
+local graph = nil
+local anim = getsenv(game:GetService("Players").LocalPlayer.Character.Animate)
+local mobModel = nil
+
+workspace.StreamingEnabled = false
+
+for i, v in pairs(getnilinstances()) do
+	if v:IsA("ModuleScript") then
+		if v.Name == "MainModule" then
+			mainmodule = require(v)
+			local thingy = v:FindFirstChild("Graphics", true)
+			if thingy then
+				graph = require(thingy)
+			end
+		end
+	end
+end
+
+if mainmodule == nil then 
+	error('Cannot find MainModule')
+	script:Destroy()
+elseif graph == nil then
+	error('Cannot find Actions Module')
+	script:Destroy()
+elseif anim == nil then
+	error('Cannot find Animate Module')
+	script:Destroy()
+end
+task.spawn(function()
+	local Profile = game:GetService("ReplicatedStorage").Profiles[game.Players.LocalPlayer.Name]
+	Profile.Inventory.ChildAdded:Connect(function(item)
+		local url = _G.Url
+		local data = mainmodule.Services.Util.GetItemDataByName(item.Name)
+
+		local msg = {
+		["embeds"] = {
+			{
+				["title"] = "Item Recieved: " .. item.Name .. "\nRarity: " .. data.Rarity.Value,
+				["description"] = "Username: " .. game.Players.LocalPlayer.Name,
+				["type"] = "rich",
+				["color"] = 5814783,
+			}
+		}
+		}
+
+		local newdata = game:GetService("HttpService"):JSONEncode(msg)
+
+		local headers = {
+		["content-type"] = "application/json"
+		}
+		request = http_request or request or HttpPost or syn.request
+		local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
+		if library.flags.hook then
+			request(abcdef)
+		end
+	end)
+end)
+
+DismantleTab:AddButton({
+	text = "Weapon Dismantle",
+	callback = function ()
+		mainmodule.Services.UI.openDismantle()
+	end
+})
+
+DismantleTab:AddButton({
+	text = "Weapon Upgrade",
+	callback = function()
+		mainmodule.Services.UI.openUpgrade()
+	end
+})
+DismantleTab:AddButton({
+	text = "CrystalForge",
+	callback = function()
+		mainmodule.Services.UI.openCrystalForge()
+	end
+})
+
+library:Init()
