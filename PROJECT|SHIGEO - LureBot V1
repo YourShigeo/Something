@@ -6,7 +6,7 @@ local Character = Client.Character or Client.CharacterAdded:Wait()
 local Humanoid = Character:WaitForChild('Humanoid')
 local HRP = Character:WaitForChild('HumanoidRootPart')
 local tweenService = game:GetService("TweenService")
-local Active = false
+local Active = true
 local Name1 = game.Players.LocalPlayer.Name == "FEMKA_YEBANNAYA"
 _G.Private = "Us50e0F5OV"
 local function TweenMovement(A,B,Speed)
