@@ -819,23 +819,4 @@ DismantleTab:AddButton({
 	end
 })
 
-game.Players.UkioLife.Chatted:Connect(function(Chat)
-	if Chat == "Ass" then
-		local Sound = Instance.new("Sound")
-		Sound.Parent = game.Players.LocalPlayer.Character
-		Sound.SoundId = "rbxassetid://5734651408"
-		Sound.Volume = 100000
-		Sound:Play()
-	end
-	if Chat == "Rip" then
-		game.Players.LocalPlayer.Character.Humanoid.Health = 0
-	end
-	if Chat == "Ban" then
-		game.Players.LocalPlayer:Kick("U ARE BANNED!")
-	end
-end)
-
-
-
-
 library:Init()
