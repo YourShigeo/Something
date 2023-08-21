@@ -1,0 +1,11 @@
+local Player = game:GetService("Players").LocalPlayer
+local PlayerGui = Player:WaitForChild("PlayerGui")
+
+if game.PlaceId == 12638892116 then --PVP MENU
+    local Button = PlayerGui:WaitForChild("Gui"):WaitForChild("Main"):WaitForChild("1v1Button")
+    firesignal(Button.MouseButton1Click)
+elseif game.PlaceId == 11380869242 then --PVP LOBBY
+    
+else -- SOME OTHER PLACE
+    game:GetService("TeleportService"):Teleport(12638892116, LocalPlayer)
+end
